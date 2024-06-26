@@ -1,15 +1,104 @@
-html, body{
+/* 기본 스타일 설정 */
+html, body {
     position: relative;
     height: 100%;
     margin: 0;
+    font-size: 16px; /* 기본 폰트 크기 설정 */
 }
-.content{
+
+.content {
     min-height: 100%;
     position: relative;
-    margin: 50px 200px;
+    margin: 50px 20px; /* 기본 여백 설정 */
 }
-.footer{
+
+.footer {
     position: absolute;
     width: 100%;
     bottom: 0;
+}
+
+input, button {
+    font-size: 1em; /* 입력 요소와 버튼의 기본 폰트 크기 설정 */
+    padding: 10px; /* 입력 요소와 버튼의 기본 패딩 설정 */
+}
+
+/* 아이폰 SE, 아이폰 5, 5s, 5c */
+@media (max-width: 320px) {
+    html, body {
+        font-size: 14px; /* 폰트 크기 조금 작게 조정 */
+    }
+
+    .content {
+        margin: 50px 10px; /* 작은 화면에서 더 작은 여백 */
+    }
+
+    input, button {
+        font-size: 1.2em; /* 입력 요소와 버튼의 폰트 크기 증가 */
+        padding: 12px; /* 입력 요소와 버튼의 패딩 증가 */
+    }
+}
+
+/* 아이폰 6, 7, 8 */
+@media (min-width: 321px) and (max-width: 375px) {
+    html, body {
+        font-size: 15px; /* 폰트 크기 조금 조정 */
+    }
+
+    .content {
+        margin: 50px 15px; /* 중간 크기 화면에서 적당한 여백 */
+    }
+
+    input, button {
+        font-size: 1.1em; /* 입력 요소와 버튼의 폰트 크기 증가 */
+        padding: 11px; /* 입력 요소와 버튼의 패딩 증가 */
+    }
+}
+
+/* 아이폰 6+, 7+, 8+, X, XS, 11 Pro, 12 Mini, 13 Mini */
+@media (min-width: 376px) and (max-width: 414px) {
+    html, body {
+        font-size: 16px; /* 기본 폰트 크기 */
+    }
+
+    .content {
+        margin: 50px 20px; /* 큰 화면에서 적당한 여백 */
+    }
+
+    input, button {
+        font-size: 1em; /* 입력 요소와 버튼의 기본 폰트 크기 */
+        padding: 10px; /* 입력 요소와 버튼의 기본 패딩 */
+    }
+}
+
+/* 아이폰 11, XR, XS Max, 12, 13, 14 */
+@media (min-width: 415px) and (max-width: 768px) {
+    html, body {
+        font-size: 17px; /* 폰트 크기 약간 증가 */
+    }
+
+    .content {
+        margin: 50px 30px; /* 큰 화면에서 적당한 여백 */
+    }
+
+    input, button {
+        font-size: 1em; /* 입력 요소와 버튼의 기본 폰트 크기 */
+        padding: 10px; /* 입력 요소와 버튼의 기본 패딩 */
+    }
+}
+
+/* 태블릿 및 더 큰 화면 */
+@media (min-width: 769px) {
+    html, body {
+        font-size: 18px; /* 큰 화면에서 폰트 크기 증가 */
+    }
+
+    .content {
+        margin: 50px 50px; /* 매우 큰 화면에서 더 큰 여백 */
+    }
+
+    input, button {
+        font-size: 1em; /* 입력 요소와 버튼의 기본 폰트 크기 */
+        padding: 10px; /* 입력 요소와 버튼의 기본 패딩 */
+    }
 }

@@ -23,7 +23,7 @@ public class MemberService implements UserDetailsService {
 
     private void validateDuplicateMember(Member member) {
         Member findMember = memberRepository.findByEmail(member.getEmail());
-        if (findMember != null)  throw new IllegalStateException("존재한 회원입니다.");
+        if (findMember != null)  throw new IllegalStateException("이미 존재한 회원입니다.");
     }
 
 

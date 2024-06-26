@@ -26,7 +26,6 @@ public class MemberService implements UserDetailsService {
         if (findMember != null)  throw new IllegalStateException("이미 존재한 회원입니다.");
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email);

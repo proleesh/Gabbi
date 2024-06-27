@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.proleesh.gabbi.constant.GoodsSellStatus;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author sung-hyuklee
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Goods {
+public class Goods extends BaseTimeEntity {
     @Id
     @Column(name="goods_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,8 +41,14 @@ public class Goods {
     @Enumerated(EnumType.STRING)
     private GoodsSellStatus goodsSellStatus; // 상품 판매 상태
 
-    private LocalDateTime registerTime; // 등록 시간
-    private LocalDateTime updateTime; // 수정 시간
+//    private LocalDateTime registerTime; // 등록 시간
+//    private LocalDateTime updateTime; // 수정 시간
+
+    @ManyToMany
+    @JoinTable(name = "member_goods",
+            joinColumns = @JoinColumn(name="member_id"),
+            inverseJoinColumns = @JoinColumn(name="goods_id"))
+            private List<Member> member;
 
 
 

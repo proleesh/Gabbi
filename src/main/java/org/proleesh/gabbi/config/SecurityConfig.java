@@ -21,6 +21,15 @@ public class SecurityConfig {
                 .logout(c -> c.logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
                         .logoutSuccessUrl("/"));
 
+        http.authorizeRequests(
+                auth -> auth.requestMatchers("/", "/members/**", "/goods/**", "/images/**", "/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+        );
+
+        http.exceptionHandling(e -> e.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+
         return http.build();
     }
 

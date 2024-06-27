@@ -45,6 +45,8 @@ dependencies {
     implementation 'org.webjars:bootstrap:5.3.3'
     implementation 'org.webjars:jquery:3.7.1'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+    implementation 'org.modelmapper:modelmapper:3.2.0'
+
 
 
 

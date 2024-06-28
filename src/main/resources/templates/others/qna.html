@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div layout:fragment="content">
     <div class="container">
@@ -22,10 +23,11 @@
                     </section>
                     <button type="button" id="modify-btn"
                             th:onclick="|location.href='@{/new-qna?id={qnaId}(qnaId=${qna.id})}'|"
+                            sec:authorize="isAuthenticated()"
                             class="btn btn-primary btn-lg">
                         수정
                     </button>
-                    <button type="button" id="delete-btn" class="btn btn-danger btn-lg">
+                    <button type="button" id="delete-btn" class="btn btn-danger btn-lg" sec:authorize="isAuthenticated()">
                         삭제
                     </button>
                 </article>

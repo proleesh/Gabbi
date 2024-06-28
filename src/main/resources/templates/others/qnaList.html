@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div layout:fragment="content">
     <div class="container">
         <h1>Q&A 문의 게시판</h1>
         <hr/>
         <button th:type="button" id="create-btn" class="btn btn-danger btn-sm mb-3"
+                sec:authorize="isAuthenticated()"
                 th:onclick="|location.href='@{/new-qna}'|">문의 글 등록
         </button>
         <br>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<div layout:fragment="content">
+    <div class="container">
+        <h1>문의 글</h1>
+        <hr/>
+        <div class="row">
+            <div>
+                <article>
+                    <input type="hidden" id="qna-id" th:value="${qna.id}">
+                    <header>
+                        <label for="qnaTitle" class="form-label">제목</label>
+                        <input type="text" class="form-control" placeholder="문의할 제목을 입력하세요..."
+                               id="qnaTitle" th:value="${qna.qnaTitle}">
+                    </header>
+                    <br/>
+                    <section>
+                        <label for="qnaContent" class="form-label">내용</label>
+                        <textarea class="form-control h-25" th:rows="10" placeholder="구체적인 내용을 서술하세요..."
+                                  id="qnaContent" th:text="${qna.qnaContent}"></textarea>
+                    </section>
+                    <br/>
+                    <button th:if="${qna.id} != null" type="button" id="modify-btn"
+                            class="btn btn-primary btn-lg">
+                        수정
+                    </button>
+                    <button th:if="${qna.id} == null" type="button" id="create-btn"
+                            class="btn btn-danger btn-lg">
+                        등록
+                    </button>
+
+                </article>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/qna.js}"></script>
+</div>
+
+</html>

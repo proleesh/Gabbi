@@ -1,29 +1,29 @@
 'use strict';
 
-var usernamePage = document.querySelector('#username-page');
-var chatPage = document.querySelector('#chat-page');
-var usernameForm = document.querySelector('#usernameForm');
-var messageForm = document.querySelector('#messageForm');
-var messageInput = document.querySelector('#message');
-var messageArea = document.querySelector('#messageArea');
-var connectingElement = document.querySelector('.connecting');
+const usernamePage = document.querySelector('#username-page');
+const chatPage = document.querySelector('#chat-page');
+const usernameForm = document.querySelector('#usernameForm');
+const messageForm = document.querySelector('#messageForm');
+const messageInput = document.querySelector('#message');
+const messageArea = document.querySelector('#messageArea');
+const connectingElement = document.querySelector('.connecting');
 
-var stompClient = null;
-var username = null;
+let stompClient = null;
+let username = null;
 
-var colors = [
+const colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
-function connect(event) {
+const connect = (event) => {
     username = document.querySelector('#name').value.trim();
 
-    if(username) {
+    if (username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
-        var socket = new SockJS('/chat');
+        const socket = new SockJS('/chat');
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);
@@ -32,7 +32,7 @@ function connect(event) {
 }
 
 
-function onConnected() {
+const onConnected = () => {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
 
@@ -46,17 +46,17 @@ function onConnected() {
 }
 
 
-function onError(error) {
-    connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
+const onError = () => {
+    connectingElement.textContent = '웹소켓 서버에 연결이 안됨. 새로고침 또는 문제 찾은 후 다시시도 하세요!';
     connectingElement.style.color = 'red';
 }
 
 
 function sendMessage(event) {
-    var messageContent = messageInput.value.trim();
+    const messageContent = messageInput.value.trim();
 
-    if(messageContent && stompClient) {
-        var chatMessage = {
+    if (messageContent && stompClient) {
+        const chatMessage = {
             sender: username,
             content: messageInput.value,
             type: 'CHAT'
@@ -69,36 +69,36 @@ function sendMessage(event) {
 }
 
 
-function onMessageReceived(payload) {
-    var message = JSON.parse(payload.body);
+const onMessageReceived = (payload) => {
+    const message = JSON.parse(payload.body);
 
-    var messageElement = document.createElement('li');
+    const messageElement = document.createElement('li');
 
-    if(message.type === 'JOIN') {
+    if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + '님 GABBI 채팅방에 참가했습니다!';
+        message.content = message.sender + '님이 GABBI 채팅방에 참가하였습니다!';
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + '님 GABBI 채팅방에 나갔습니다!';
+        message.content = message.sender + '님이 GABBI 채팅방에 나갔습니다!';
     } else {
         messageElement.classList.add('chat-message');
 
-        var avatarElement = document.createElement('i');
-        var avatarText = document.createTextNode(message.sender[0]);
+        const avatarElement = document.createElement('i');
+        const avatarText = document.createTextNode(message.sender[0]);
         avatarElement.appendChild(avatarText);
         avatarElement.style['background-color'] = getAvatarColor(message.sender);
 
         messageElement.appendChild(avatarElement);
 
-        var usernameElement = document.createElement('span');
-        var usernameText = document.createTextNode(message.sender);
+        const usernameElement = document.createElement('span');
+        const usernameText = document.createTextNode(message.sender);
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
 
     }
 
-    var textElement = document.createElement('p');
-    var messageText = document.createTextNode(message.content);
+    const textElement = document.createElement('p');
+    const messageText = document.createTextNode(message.content);
     textElement.appendChild(messageText);
 
     messageElement.appendChild(textElement);
@@ -111,12 +111,12 @@ function onMessageReceived(payload) {
 
 
 function getAvatarColor(messageSender) {
-    var hash = 0;
-    for (var i = 0; i < messageSender.length; i++) {
+    let hash = 0;
+    for (let i = 0; i < messageSender.length; i++) {
         hash = 31 * hash + messageSender.charCodeAt(i);
     }
 
-    var index = Math.abs(hash % colors.length);
+    const index = Math.abs(hash % colors.length);
     return colors[index];
 }
 

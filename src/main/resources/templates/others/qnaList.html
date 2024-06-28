@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<div layout:fragment="content">
+    <div class="container">
+        <h1>Q&A 문의 게시판</h1>
+        <hr/>
+        <button th:type="button" id="create-btn" class="btn btn-danger btn-sm mb-3"
+                th:onclick="|location.href='@{/new-qna}'|">문의 글 등록
+        </button>
+        <br>
+        <div class="card mb-3" th:each="item: ${qna_all}">
+            <h5 class="card-header" th:text="${item.id}"></h5>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${item.qnaTitle}"></h5>
+                <p class="card-text" th:text="${item.qnaContent}"></p>
+                <a class="btn btn-primary" th:href="@{/qna-all/{id}(id=${item.id})}">보러가기</a>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/qna.js}"></script>
+
+</div>
+
+</html>

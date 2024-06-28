@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<div layout:fragment="content">
+    <div class="container">
+        <h1>등록 글 상세보기</h1>
+        <hr/>
+        <div class="row">
+            <div>
+                <article>
+                    <input type="hidden" id="qna-id" th:value="${qna.id}">
+                    <header>
+                        <h1 class="fw-bolder mg-1" th:text="${qna.qnaTitle}"></h1>
+                        <div class="text-muted fst-italic mb-2"
+                             th:text="|Posted on ${#temporals.format(qna.registerTime, 'yyyy-MM-dd HH:mm')}|"></div>
+                    </header>
+                    <br>
+                    <section>
+                        <p class="fs-5 mb-5" th:text="${qna.qnaContent}"></p>
+                    </section>
+                    <button type="button" id="modify-btn"
+                            th:onclick="|location.href='@{/new-qna?id={qnaId}(qnaId=${qna.id})}'|"
+                            class="btn btn-primary btn-lg">
+                        수정
+                    </button>
+                    <button type="button" id="delete-btn" class="btn btn-danger btn-lg">
+                        삭제
+                    </button>
+                </article>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/qna.js}"></script>
+</div>
+</html>

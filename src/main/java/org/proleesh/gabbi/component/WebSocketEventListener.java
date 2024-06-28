@@ -12,7 +12,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-
+/**
+ * @author sung-hyuklee
+ * @since JDK 21
+ * date: 2024.6.27
+ */
 @Component
 public class WebSocketEventListener {
     private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);

@@ -13,15 +13,19 @@
     <div class="container">
     <h1>로그인</h1>
     <form role="form" method="post" action="/members/login">
-        <div class="mb-3 col-md-4">
-            <label th:for="email" class="form-label">이메일</label>
-            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요">
+        <div class="form-floating mb-3 col-md-4">
+            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">이메일</label>
             <div id="emailHelp" class="form-text">이메일을 입력하세요.</div>
         </div>
-        <div class="mb-3 col-md-4">
-            <label th:for="password" class="form-label">패스워드</label>
-            <input type="password" name="password" id="password" class="form-control" aria-describedby="passwordHelp" placeholder="패스워드를 입력해주세요">
+        <div class="form-floating col-md-4">
+            <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Password">
+            <label for="password">패스워드</label>
             <div id="passwordHelp" class="form-text">패스워드를 입력하세요.</div>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">기억해줘🤓</label>
         </div>
         <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
         <button class="btn btn-primary">로그인</button>

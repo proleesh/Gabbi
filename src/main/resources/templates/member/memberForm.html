@@ -25,6 +25,7 @@
 <div layout:fragment="content">
     <div class="container">
         <h1>회원 가입</h1>
+        <hr>
         <form action="/members/new" role="form" method="post" th:object="${memberFormDTO}">
             <div class="mb-3 col-md-4">
                 <label th:for="name" class="form-label">이름</label>

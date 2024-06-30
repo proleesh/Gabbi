@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="header">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+
+    <nav class="navbar navbar-expand-lg" style="background-color: #00dbbf">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">GABBI ADMIN</a>
+            <a href="/"><img th:src="@{/img/gabbi.png}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top"></a>
+            &nbsp;
+            <a class="navbar-brand" href="/">GABBI</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -14,14 +17,21 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link active" aria-current="page" href="/admin/goods/new">상품 등록</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/watch">GABBI Flex</a>
+                    </li>
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                            GABBI
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/chat">GABBI 채팅</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/watch">GABBI Flex</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/admin/goods">상품 관리</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="/watch">GABBI 비디오</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/cart">장바구니</a>
@@ -34,11 +44,14 @@
                             기타
                         </a>
                         <ul class="dropdown-menu">
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/qna-all">Q&A 질문현황</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/chat">관리자와 채팅</a></li>
+                            <li><a class="dropdown-item" href="/admin/goods/new">상품 등록</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/upload">동영상 업로드</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/about">About</a></li>
                         </ul>
                     </li>
 

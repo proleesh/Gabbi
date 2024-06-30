@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div layout:fragment="content">
     <div class="container">
@@ -20,13 +21,13 @@
         </ul>
 
         <div class="mt-3">
-            <a class="btn btn-primary btn-lg" href="/upload">새로운 동영상 업로드</a>
+            <a class="btn btn-primary btn-lg" href="/upload" sec:authorize="isAuthenticated()">새로운 동영상 업로드</a>
         </div>
 
 
-<!--        <div class="ratio ratio-16x9">-->
-<!--            <iframe th:src="@{${videoUrl}}" title="Video" allowfullscreen></iframe>-->
-<!--        </div>-->
+        <!--        <div class="ratio ratio-16x9">-->
+        <!--            <iframe th:src="@{${videoUrl}}" title="Video" allowfullscreen></iframe>-->
+        <!--        </div>-->
     </div>
 </div>
 </html>

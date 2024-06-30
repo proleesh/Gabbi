@@ -9,13 +9,13 @@
         <form method="POST" enctype="multipart/form-data" action="/upload">
             <div class="input-group mb-3">
                 <input type="file" name="file" class="form-control" id="file" required>
-                <label class="input-group-text" for="file">GABBI</label>
+                <label class="input-group-text" for="file">동영상</label>
             </div>
             <button type="submit" class="btn btn-primary btn-lg">업로드</button>
         </form>
 
         <div class="mt-3">
-            <a class="btn btn-secondary btn-lg" href="/watch">되돌아가기</a>
+            <a class="btn btn-secondary btn-lg" href="/watch">돌아가기</a>
         </div>
 
         <div class="mt-3" th:if="${message}">

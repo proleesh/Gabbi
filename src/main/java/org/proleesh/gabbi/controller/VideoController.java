@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
 /**
  * @author sung-hyuklee
  * data: 2024.6.30
@@ -97,6 +98,7 @@ public class VideoController {
             String originalFilename = file.getOriginalFilename();
 
             Path destinationFile = videoLocation.resolve(originalFilename).normalize().toAbsolutePath();
+
             file.transferTo(destinationFile.toFile());
 
             // 이름 특징 뽑내기
@@ -104,12 +106,13 @@ public class VideoController {
             int dotIndex = originalFilename.lastIndexOf('.');
 
             if (underscoreIndex == -1 || dotIndex == -1 || underscoreIndex >= dotIndex) {
-                redirectAttributes.addFlashAttribute("message", "파일 이름은 'author_title.*' 형식이어야 합니다.");
+                redirectAttributes.addFlashAttribute("message", "동영상 파일 이름은 'author_title.*' 형식이어야 합니다.");
                 return "redirect:/upload";
             }
 
             String author = originalFilename.substring(0, underscoreIndex);
             String title = originalFilename.substring(underscoreIndex + 1, dotIndex);
+
 
             // 동영상을 DB에 저장하기
             Video video = new Video(file.getOriginalFilename(),

@@ -21,6 +21,9 @@
                         <a class="nav-link" href="/admin/goods">상품 관리</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/watch">GABBI 비디오</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/cart">장바구니</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
@@ -34,6 +37,8 @@
                             <li><a class="dropdown-item" href="/qna-all">Q&A 질문현황</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/chat">관리자와 채팅</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/upload">동영상 업로드</a></li>
                         </ul>
                     </li>
 

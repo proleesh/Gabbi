@@ -60,6 +60,7 @@
     <form role="form" method="post" enctype="multipart/form-data"
           th:object="${goodsFormDTO}">
         <h1>상품 등록</h1>
+        <hr>
         <input type="hidden" th:field="*{id}">
         <div class="mb-3">
             <select th:field="*{goodsSellStatus}" class="form-select">

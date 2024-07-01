@@ -6,7 +6,8 @@
 
 <div layout:fragment="content">
     <div class="container">
-        <h1>Q&A 문의 게시판</h1>
+        <br>
+        <h1><img th:src="@{/img/qna.png}" width="50" height="50">&nbsp;Q&A 문의 게시판</h1>
         <hr/>
         <button th:type="button" id="create-btn" class="btn btn-danger btn-sm mb-3"
                 sec:authorize="isAuthenticated()"

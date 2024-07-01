@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <a href="/"><img th:src="@{/img/gabbi.png}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top"></a>
             &nbsp;
-            <a class="navbar-brand" href="/">GABBI</a>
+            <a class="navbar-brand" href="/"><img th:src="@{/img/font/gabbi-font.png}" alt="Logo" width="100" height="35" class="d-inline-block align-text-top"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -17,6 +17,25 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                            기타
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/qna-all"><img th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A 질문현황</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/admin/goods/new"><img th:src="@{/img/new-goods.png}" width="25" height="25">&nbsp;상품 등록</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/upload"><img th:src="@{/img/video-upload.png}" width="25" height="25">&nbsp;동영상 업로드</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/about">About</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav mb-5 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/watch"><img th:src="@{/img/video.png}" width="25" height="25">&nbsp;WATCH</a>
                     </li>
@@ -32,24 +51,6 @@
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/orders"><img th:src="@{/img/shopping-history.png}" width="25" height="25">&nbsp;구매이력</a>
                     </li>
-                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                            기타
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/qna-all">Q&A 질문현황</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/admin/goods/new">상품 등록</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/upload">동영상 업로드</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/about">About</a></li>
-                        </ul>
-                    </li>
-
-                </ul>
-                <ul class="navbar-nav mb-5 mb-lg-0">
                     <li class="nav-item" sec:authorize="isAnonymous()">
                         <a class="nav-link" href="/members/login">로그인</a>
                     </li>

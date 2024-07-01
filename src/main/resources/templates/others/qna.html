@@ -6,6 +6,7 @@
 
 <div layout:fragment="content">
     <div class="container">
+        <br>
         <h1>등록 글 상세보기</h1>
         <hr/>
         <div class="row">
@@ -30,6 +31,7 @@
                     <button type="button" id="delete-btn" class="btn btn-danger btn-lg" sec:authorize="isAuthenticated()">
                         삭제
                     </button>
+                    <a class="btn btn-secondary btn-lg" href="/qna-all">돌아가기</a>
                 </article>
             </div>
         </div>

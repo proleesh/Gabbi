@@ -57,9 +57,10 @@
 </th:block>
 <div layout:fragment="content">
     <div class="container">
+    <br>
     <form role="form" method="post" enctype="multipart/form-data"
           th:object="${goodsFormDTO}">
-        <h1>GABBI 상품 등록</h1>
+        <h1><img th:src="@{/img/new-goods.png}" width="50" height="50">&nbsp;GABBI 상품 등록</h1>
         <hr>
         <input type="hidden" th:field="*{id}">
         <div class="mb-3">

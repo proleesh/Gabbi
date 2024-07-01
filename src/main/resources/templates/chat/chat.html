@@ -9,10 +9,11 @@
     <noscript>
         <h2>죄송합니다! 당신의 브라우저는 JavaScript 을 지원하지 않습니다.</h2>
     </noscript>
+    <br>
 
     <div id="username-page">
         <div class="username-page-container">
-            <h1 class="title">임시 사용할 이름은?</h1>
+            <h1 class="title"><img th:src="@{/img/chat.png}" width="50" height="50">&nbsp;임시 사용할 이름은?</h1>
             <form id="usernameForm" name="usernameForm">
                 <div class="form-group">
                     <input type="text" id="name" placeholder="임시 이름" autocomplete="off" class="form-control"/>
@@ -24,6 +25,7 @@
         </div>
     </div>
     <div id="chat-page" class="hidden">
+        <br>
         <div class="chat-container">
             <div class="chat-header">
                 <h2>GABBI 실시간 채팅방</h2>

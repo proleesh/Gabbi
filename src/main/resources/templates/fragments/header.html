@@ -18,23 +18,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/watch">GABBI Flex</a>
-                    </li>
-                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                            GABBI
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/chat">GABBI 채팅</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/watch">GABBI Flex</a></li>
-                        </ul>
+                        <a class="nav-link" href="/watch"><img th:src="@{/img/video.png}" width="25" height="25">&nbsp;WATCH</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/admin/goods">상품 관리</a>
+                        <a class="nav-link" href="/chat"><img th:src="@{/img/chat.png}" width="25" height="25">&nbsp;CHAT</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/cart">장바구니</a>
+                        <a class="nav-link" href="/admin/goods"><img th:src="@{/img/shop-manage.png}" width="25" height="25">&nbsp;상품 관리</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/cart"><img th:src="@{/img/shopping-cart.png}" width="25" height="25">&nbsp;장바구니</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/orders">구매이력</a>

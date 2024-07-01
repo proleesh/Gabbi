@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
+<head>
+    <title th:text="${videoTitle}"></title>
+</head>
 <div layout:fragment="content">
     <div class="container">
-        <h1 class="my-4" th:text="${videoTitle}">GABBI Flex</h1>
+        <h1 class="my-4" th:text="${videoTitle}">WATCH</h1>
         <hr>
-        <div></div>
         <div class="ratio ratio-16x9">
             <iframe th:src="@{${videoUrl}}" title="Video" allowfullscreen></iframe>
         </div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>아직 없어요</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/error.css}"/>
+</head>
+<div layout:fragment="content">
+        <div id="notfound">
+            <div class="notfound">
+                <div class="notfound-404">
+                    <h1>Oops</h1>
+                    <h2>404 - 아직 없어요 ㅠㅠ</h2>
+                </div>
+                <a href="/">홈페이지에가기</a>
+            </div>
+        </div>
+</div>
+
+</html>

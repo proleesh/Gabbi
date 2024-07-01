@@ -3,11 +3,15 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
 <div layout:fragment="content">
     <div class="container">
-        <h1 class="my-4">GABBI Flex</h1>
+        <h1 class="my-4">WATCH</h1>
         <hr>
+
+        <div class="mt-3">
+            <a class="btn btn-primary btn-lg" href="/upload" sec:authorize="isAuthenticated()">새로운 동영상 업로드</a>
+        </div>
+        <br>
         <div class="mt-3" th:if="${message}">
             <div class="alert alert-info" th:text="${message}"></div>
         </div>
@@ -21,7 +25,8 @@
                             </video>
                         </a></div>
                     <div class="col-md-5">
-                        <h1><a th:href="@{/watch/{filename}(filename=${video.fileName})}" th:text="${video.title}">Video</a></h1>
+                        <br>
+                        <h3><a th:href="@{/watch/{filename}(filename=${video.fileName})}" th:text="${video.title}"></a></h3>
                         <h4 th:text="'Artist: ' + ${video.author}"></h4>
                     </div>
                         <div class="text-muted fst-italic mb-2"
@@ -30,14 +35,6 @@
             </li>
         </ul>
 
-        <div class="mt-3">
-            <a class="btn btn-primary btn-lg" href="/upload" sec:authorize="isAuthenticated()">새로운 동영상 업로드</a>
-        </div>
-
-
-        <!--        <div class="ratio ratio-16x9">-->
-        <!--            <iframe th:src="@{${videoUrl}}" title="Video" allowfullscreen></iframe>-->
-        <!--        </div>-->
     </div>
 </div>
 </html>

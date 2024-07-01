@@ -6,14 +6,21 @@
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">GABBI ADMIN</a></li>
-            <li class="nav-item" sec:authorize="isAuthenticated()"><a href="/admin/goods/new" class="nav-link px-2 text-body-secondary">상품 등록</a></li>
-            <li class="nav-item" sec:authorize="isAuthenticated()"><a href="/admin/goods" class="nav-link px-2 text-body-secondary">상품 관리</a></li>
+            <li class="nav-item" sec:authorize="isAuthenticated()"><a href="/admin/goods/new"
+                                                                      class="nav-link px-2 text-body-secondary">상품
+                등록</a></li>
+            <li class="nav-item" sec:authorize="isAuthenticated()"><a href="/admin/goods"
+                                                                      class="nav-link px-2 text-body-secondary">상품
+                관리</a></li>
             <li class="nav-item"><a href="/qna-all" class="nav-link px-2 text-body-secondary">Q&A</a></li>
             <li class="nav-item"><a href="/about" class="nav-link px-2 text-body-secondary">About</a></li>
         </ul>
         <p class="text-center text-body-secondary">
-            <img src="https://techstack-generator.vercel.app/java-icon.svg" alt="icon" width="50" height="50" />
-            <img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="icon" width="50" height="50" />
+            <img th:src="@{/img/github.png}" alt="icon" width="50" height="50"/>
+            <img th:src="@{/img/spring.png}" alt="icon" width="50" height="50"/>
+            <img th:src="@{/img/thymeleaf.png}" alt="icon" width="186" height="50"/>
+            <img th:src="@{/img/java-icon.svg}" alt="icon" width="50" height="50"/>
+            <img th:src="@{/img/mysql-icon.svg}" alt="icon" width="50" height="50"/>
         </p>
         <p class="text-center text-body-secondary">Designed by Sung-Hyuk Lee, Developed by Sung-Hyuk Lee</p>
         <p class="text-center text-body-secondary">Tel: +82 010-9482-6726 | Email: merci726@yahoo.com</p>

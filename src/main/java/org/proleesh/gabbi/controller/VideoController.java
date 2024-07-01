@@ -76,18 +76,19 @@ public class VideoController {
             model.addAttribute("videoTitle", video.getTitle());
             model.addAttribute("videoAuthor", video.getAuthor());
             model.addAttribute("videoDate", video.getRegisterTime());
+            model.addAttribute("videoId", video.getId());
             return "watch/watchVideo";
         } else {
             return "redirect:/watch";
         }
     }
 
-    @GetMapping("/upload")
+    @GetMapping("/watch/upload")
     public String showUploadForm() {
         return "upload/upload";
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/watch/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
         try {
@@ -130,9 +131,9 @@ public class VideoController {
             return "redirect:/upload";
         }
     }
-
-    private String getFileExtension(String filename) {
-        int dotIndex = filename.lastIndexOf('.');
-        return (dotIndex == -1) ? "" : filename.substring(dotIndex);
+    @PostMapping("/watch/delete/{id}")
+    public String deleteVideo(@PathVariable Long id){
+        videoRepository.deleteById(id);
+        return "redirect:/watch";
     }
 }

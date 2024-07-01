@@ -3,6 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>GABBI WATCH</title>
+</head>
 <div layout:fragment="content">
     <div class="container">
         <br>
@@ -10,7 +13,7 @@
         <hr>
 
         <div class="mt-3">
-            <a class="btn btn-primary btn-lg" href="/upload" sec:authorize="isAuthenticated()">새로운 동영상 업로드</a>
+            <a class="btn btn-primary btn-lg" href="/watch/upload" sec:authorize="isAuthenticated()">새로운 동영상 업로드</a>
         </div>
         <br>
         <div class="mt-3" th:if="${message}">
@@ -28,7 +31,7 @@
                     <div class="col-md-5">
                         <br>
                         <h3><a th:href="@{/watch/{filename}(filename=${video.fileName})}" th:text="${video.title}"></a></h3>
-                        <h4 th:text="'Artist: ' + ${video.author}"></h4>
+                        <h4 th:text="'아티스트: ' + ${video.author}"></h4>
                     </div>
                         <div class="text-muted fst-italic mb-2"
                              th:text="|발표시간 ${#temporals.format(video.registerTime, 'yyyy-MM-dd HH:mm')}|"></div>

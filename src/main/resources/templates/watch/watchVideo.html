@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title th:text="${videoTitle}"></title>
 </head>
@@ -14,11 +15,14 @@
             <iframe th:src="@{${videoUrl}}" title="Video" allowfullscreen></iframe>
         </div>
         <hr>
-        <h4 th:text="'Artist: ' + ${videoAuthor}"></h4>
+        <h4 th:text="'아티스트: ' + ${videoAuthor}"></h4>
         <div class="text-muted fst-italic mb-2"
              th:text="|발표시간: ${#temporals.format(videoDate, 'yyyy-MM-dd HH:mm')}|"></div>
 
+        <form th:action="@{/watch/delete/{id}(id=${videoId})}" method="post" onsubmit="return confirm('정말로 삭제할까요?');">
+            <button type="submit" class="btn btn-danger mt-3" sec:authorize="isAuthenticated()">삭제</button>
         <a class="btn btn-secondary mt-3" href="/watch">돌아가기</a>
+        </form>
     </div>
 </div>
 

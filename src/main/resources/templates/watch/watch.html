@@ -12,11 +12,21 @@
             <div class="alert alert-info" th:text="${message}"></div>
         </div>
         <ul class="list-group">
-            <li class="list-group-item" th:each="video : ${videos}">
-                <a th:href="@{/watch/{filename}(filename=${video.fileName})}" th:text="${video.title}">Video</a>
-                <p th:text="'Artist: ' + ${video.author}"></p>
-                <div class="text-muted fst-italic mb-2"
-                     th:text="|발표시간 ${#temporals.format(video.registerTime, 'yyyy-MM-dd HH:mm')}|"></div>
+            <li class="list-group-item mb-3" th:each="video : ${videos}">
+                <div class="row">
+                    <div class="col-md-5">
+                        <a th:href="@{/watch/{filename}(filename=${video.fileName})}">
+                            <video width="300" height="200" th:src="@{/videos/{filename}(filename=${video.fileName})}"
+                                   title="Video" autoplay loop muted playsinline>
+                            </video>
+                        </a></div>
+                    <div class="col-md-5">
+                        <h1><a th:href="@{/watch/{filename}(filename=${video.fileName})}" th:text="${video.title}">Video</a></h1>
+                        <h4 th:text="'Artist: ' + ${video.author}"></h4>
+                    </div>
+                        <div class="text-muted fst-italic mb-2"
+                             th:text="|발표시간 ${#temporals.format(video.registerTime, 'yyyy-MM-dd HH:mm')}|"></div>
+                </div>
             </li>
         </ul>
 

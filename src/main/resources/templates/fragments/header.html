@@ -23,12 +23,7 @@
                             기타
                         </a>
                         <ul class="dropdown-menu">
-                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/qna-all"><img th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A 질문현황</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/admin/goods/new"><img th:src="@{/img/new-goods.png}" width="25" height="25">&nbsp;상품 등록</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/watch/upload"><img th:src="@{/img/video-upload.png}" width="25" height="25">&nbsp;동영상 업로드</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/about">About</a></li>
                         </ul>
@@ -41,6 +36,12 @@
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/chat"><img th:src="@{/img/chat.png}" width="25" height="25">&nbsp;CHAT</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/watch/upload"><img th:src="@{/img/video-upload.png}" width="25" height="25">&nbsp;WATCH 업로드</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/admin/goods/new"><img th:src="@{/img/new-goods.png}" width="25" height="25">&nbsp;상품 등록</a></a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/admin/goods"><img th:src="@{/img/shop-manage.png}" width="25" height="25">&nbsp;상품 관리</a>
@@ -61,7 +62,7 @@
                 <form class="d-flex" role="search" th:action="@{/}" method="get">
                     <input name="searchQuery" class="form-control me-2" type="search" placeholder="검색하기"
                            aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success" type="submit"><img th:src="@{/img/search.png}" width="25" height="25"></button>
                 </form>
             </div>
         </div>

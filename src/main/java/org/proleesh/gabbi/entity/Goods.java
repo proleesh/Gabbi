@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.proleesh.gabbi.constant.GoodsSellStatus;
+import org.proleesh.gabbi.dto.GoodsFormDTO;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -51,5 +51,12 @@ public class Goods extends BaseTimeEntity {
             private List<Member> member;
 
 
+    public void updateGoods(GoodsFormDTO goodsFormDTO) {
+        this.goodsName = goodsFormDTO.getGoodsName();
+        this.goodsPrice = goodsFormDTO.getGoodsPrice();
+        this.goodsStockNum = goodsFormDTO.getStockNumber();
+        this.goodsDetail = goodsFormDTO.getGoodsDetail();
+        this.goodsSellStatus = goodsFormDTO.getGoodsSellStatus();
+    }
 
 }

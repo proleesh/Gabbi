@@ -13,13 +13,13 @@
 
     <div id="username-page">
         <div class="username-page-container">
-            <h1 class="title"><img th:src="@{/img/chat.png}" width="50" height="50">&nbsp;임시 사용할 이름은?</h1>
+            <h1 class="title"><img th:src="@{/img/chat.png}" width="50" height="50">&nbsp;CHAT</h1>
             <form id="usernameForm" name="usernameForm">
                 <div class="form-group">
-                    <input type="text" id="name" placeholder="임시 이름" autocomplete="off" class="form-control"/>
+                    <input type="text" id="name" placeholder="임시 이름 입력하세요..." autocomplete="off" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="accent username-submit">채팅 시작</button>
+                    <button type="submit" class="accent username-submit"><img th:src="@{/img/chat.png}" width="25" height="25">&nbsp;채팅 시작</button>
                 </div>
             </form>
         </div>
@@ -28,7 +28,7 @@
         <br>
         <div class="chat-container">
             <div class="chat-header">
-                <h2>GABBI 실시간 채팅방</h2>
+                <h2><img th:src="@{/img/chat.png}" width="50" height="50">&nbsp;GABBI 실시간 채팅방</h2>
             </div>
             <div class="connecting">
                 잠시만 기다려주세요 연결중입니다...
@@ -41,7 +41,7 @@
                     <div class="input-group clearfix">
                         <input type="text" id="message" placeholder="하고 싶은 말..." autocomplete="off"
                                class="form-control"/>
-                        <button type="submit" class="primary">보냄</button>
+                        <button type="submit" class="btn btn-light"><img th:src="@{/img/chat.png}" width="15" height="15">&nbsp;보냄</button>
                     </div>
                 </div>
             </form>

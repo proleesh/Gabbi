@@ -16,7 +16,7 @@ body {
     font-size: 1rem;
     line-height: 1.58;
     color: #333;
-    background-color: #ffffff;
+    background-color: #c9d2d3;
     height: 100%;
 }
 
@@ -26,7 +26,7 @@ body:before {
     position: absolute;
     top: 0;
     left: 0;
-    background: #126280;
+    background: #eeecec;
     content: "";
     z-index: 0;
 }
@@ -91,14 +91,9 @@ button.default {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
 }
 
-button.primary {
-    background-color: #00d8ec;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
-    color: #fff;
-}
 
 button.accent {
-    background-color: #ff0078;
+    background-color: #c9d2d3;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
@@ -114,9 +109,7 @@ button.accent {
     width: 100%;
     max-width: 500px;
     display: inline-block;
-    margin-top: 42px;
     vertical-align: middle;
-    position: relative;
     padding: 35px 55px 35px;
     min-height: 250px;
     position: absolute;

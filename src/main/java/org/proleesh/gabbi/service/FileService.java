@@ -1,14 +1,20 @@
 package org.proleesh.gabbi.service;
 
-import lombok.extern.java.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.UUID;
 
+/**
+ * @author sung-hyuklee
+ * date: 2024.6.28
+ * 파일 서비스 로직 처리
+ */
 @Service
-@Log
 public class FileService {
+    private static final Logger logger = LoggerFactory.getLogger(FileService.class);
     public String uploadFile(String uploadPath, String originalFileName, byte[] fileData) throws Exception{
         UUID uuid = UUID.randomUUID();
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
@@ -24,9 +30,9 @@ public class FileService {
 
         if(deleteFile.exists()){
             deleteFile.delete();
-            log.info("파일을 삭제하였습니다.");
+            logger.info("파일을 삭제하였습니다.");
         }else{
-            log.info("파일을 존재하지 않습니다.");
+            logger.info("파일을 존재하지 않습니다.");
         }
     }
 }

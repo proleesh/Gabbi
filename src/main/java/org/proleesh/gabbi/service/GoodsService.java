@@ -17,11 +17,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author sung-hyuklee
+ * date: 2024.6.24
+ * 상품 서비스 로직 처리
+ */
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class GoodsService {
-    private static Logger logger = LoggerFactory.getLogger(GoodsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(GoodsService.class);
     private final GoodsRepository goodsRepository;
     private final GoodsImgService goodsImgService;
     private final GoodsImgRepository goodsImgRepository;

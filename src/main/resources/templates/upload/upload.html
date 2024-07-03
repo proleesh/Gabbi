@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div layout:fragment="content">
     <div class="container">
         <br>
         <h1 class="my-4"><img th:src="@{/img/video-upload.png}" width="50" height="50">&nbsp;WATCH 업로드</h1>
         <hr>
-        <form method="POST" enctype="multipart/form-data" action="/watch/upload">
+        <form method="POST" enctype="multipart/form-data" action="/watch/upload" sec:authorize="isAuthenticated()">
             <div class="input-group mb-3">
                 <input type="file" name="file" class="form-control" id="file" required>
                 <label class="input-group-text" for="file">동영상</label>

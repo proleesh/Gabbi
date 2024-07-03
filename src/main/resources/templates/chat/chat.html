@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <link rel="stylesheet" th:href="@{/css/chat.css}"/>
 </head>
@@ -11,7 +12,7 @@
     </noscript>
     <br>
 
-    <div id="username-page">
+    <div id="username-page" sec:authorize="isAuthenticated()">
         <div class="username-page-container">
             <h1 class="title"><img th:src="@{/img/chat.png}" width="50" height="50">&nbsp;CHAT</h1>
             <form id="usernameForm" name="usernameForm">
@@ -24,7 +25,7 @@
             </form>
         </div>
     </div>
-    <div id="chat-page" class="hidden">
+    <div id="chat-page" class="hidden" sec:authorize="isAuthenticated()">
         <br>
         <div class="chat-container">
             <div class="chat-header">

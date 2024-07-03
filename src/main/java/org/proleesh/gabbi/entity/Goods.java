@@ -19,7 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Goods extends BaseTimeEntity {
+public class Goods extends BaseEntity {
     @Id
     @Column(name="goods_id")
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -4,12 +4,15 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.proleesh.gabbi.dto.GoodsFormDTO;
 import org.proleesh.gabbi.dto.GoodsImgDTO;
+import org.proleesh.gabbi.dto.GoodsSearchDTO;
 import org.proleesh.gabbi.entity.Goods;
 import org.proleesh.gabbi.entity.GoodsImg;
 import org.proleesh.gabbi.repository.GoodsImgRepository;
 import org.proleesh.gabbi.repository.GoodsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +30,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GoodsService {
     private static final Logger logger = LoggerFactory.getLogger(GoodsService.class);
+
     private final GoodsRepository goodsRepository;
     private final GoodsImgService goodsImgService;
     private final GoodsImgRepository goodsImgRepository;
@@ -90,6 +94,11 @@ public class GoodsService {
 
         return goods.getId();
 
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Goods> getAdminGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
+        return goodsRepository.getAdminGoodsPage(goodsSearchDTO, pageable);
     }
 
 }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(() => {
+            $("#searchBtn").on("click", event => {
+                event.preventDefault();
+                page(0);
+            });
+        });
+
+        const page = page => {
+            let searchDateType = $("#searchDateType").val();
+            let searchSellStatus = $("#searchSellStatus").val();
+            let searchBy = $("#searchBy").val();
+            let searchQuery = $("#searchQuery").val();
+
+            location.href = "/admin/goodsAll/" + page + "?searchDateType="
+                + searchDateType +
+                "&searchSellStatus=" + searchSellStatus +
+                "&searchBy=" + searchBy +
+                "&searchQuery=" + searchQuery;
+        }
+    </script>
+</th:block>
+<th:block layout:fragment="css">
+    <style>
+        select {
+            margin-right: 5px;
+        }
+    </style>
+</th:block>
+<div layout:fragment="content">
+    <div class="container">
+        <br>
+        <form th:action="@{'/admin/goodsAll/' + ${goodsAll.number}}" role="form" method="get"
+              th:object="${goodsAll}">
+            <h1><img th:src="@{/img/shop-manage.png}" width="50" height="50">&nbsp;상품 관리</h1>
+            <hr>
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>상품아이디</td>
+                    <td>상품명</td>
+                    <td>상태</td>
+                    <td>등록자</td>
+                    <td>등록일</td>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="goods : ${goodsAll}">
+                    <td th:text="${goods.id}"></td>
+                    <td>
+                        <a th:href="'/admin/goods/' + ${goods.id}"
+                           th:text="${goods.goodsName}"></a>
+                    </td>
+                    <td th:text="${goods.goodsSellStatus.toString().equals('SELL')} ? '판매중' : '품절'">
+                    </td>
+                    <td th:text="${goods.createdBy}"></td>
+                    <td th:text="${goods.registerTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div th:with="start=${(goodsAll.number/maxPage)*maxPage + 1},
+             end=(${(goodsAll.totalPages == 0) ? 1 : (start + (maxPage - 1)
+              < goodsAll.totalPages ? start + (maxPage - 1) : goodsAll.totalPages)})">
+                <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item" th:classappend="${goodsAll.first} ? 'disabled'">
+                        <a th:onclick="'javascript:page(' + ${goodsAll.number - 1} + ')'" aria-label="Previous"
+                           class="page-link">
+                            <span aria-label="true">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start,end)}"
+                        th:classappend="${goodsAll.number eq page - 1}? 'active':''">
+                        <a th:onclick="'javascript:page(' + ${page - 1} + ')'"
+                           th:inline="text" class="page-link">
+                            [[${page}]]
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${goodsAll.last}?'disabled'">
+                        <a th:onclick="'javascript:page(' + ${goodsAll.number + 1} + ')'"
+                           aria-label="Next" class="page-link">
+                            <span aria-hidden="true">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row row-cols-lg-auto g-3 justify-content-center" th:object="${goodsSearchDTO}">
+                <select th:field="*{searchDateType}" class="form-control" style="width: auto;">
+                    <option value="all">전체기간</option>
+                    <option value="1d">1일</option>
+                    <option value="1w">1주</option>
+                    <option value="1m">1개월</option>
+                    <option value="6m">6개월</option>
+                </select>
+                <select th:field="*{searchSellStatus}" class="form-control" style="width: auto;">
+                    <option value="">판매상태(전체)</option>
+                    <option value="SELL">판매</option>
+                    <option value="SOLD_OUT">품절</option>
+                </select>
+                <select th:field="*{searchBy}" class="form-control" style="width:auto;">
+                    <option value="goodsName">상품명</option>
+                    <option value="createdBy">등록자</option>
+                </select>
+
+                <input th:field="*{searchQuery}"
+                       type="text"
+                       class="form-control"
+                       placeholder="검색어를 입력해주세요">
+                <button id="searchBtn" type="submit" class="btn btn-light">검색</button>
+            </div>
+        </form>
+    </div>
+</div>
+</html>

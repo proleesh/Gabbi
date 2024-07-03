@@ -31,7 +31,7 @@ server:
   port: 80
 
 
-goodsImgLocation: /Users/sung-hyuklee/gabbi/image
+goodsImgLocation: src/main/resources/static/gabbi/images
 uploadPath: src/main/resources/static/gabbi/images/
 file:
   upload-dir: src/main/resources/static/videos

@@ -13,7 +13,7 @@ import java.util.List;
  * data: 2024.6.24
  * DAO(Data Access Object) 역할를 하는 Goods(상품)의 repository
  */
-public interface GoodsRepository extends JpaRepository<Goods, Long>, QuerydslPredicateExecutor<Goods> {
+public interface GoodsRepository extends JpaRepository<Goods, Long>, QuerydslPredicateExecutor<Goods>, GoodsRepositoryCustom {
 
     // 상품 이름을 찾는 쿼리 메소드
     List<Goods> findByGoodsName(String goodsName);

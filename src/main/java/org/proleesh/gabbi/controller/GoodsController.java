@@ -4,7 +4,14 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.proleesh.gabbi.dto.GoodsFormDTO;
+import org.proleesh.gabbi.dto.GoodsSearchDTO;
+import org.proleesh.gabbi.entity.Goods;
+import org.proleesh.gabbi.repository.GoodsImgRepository;
+import org.proleesh.gabbi.repository.GoodsRepository;
 import org.proleesh.gabbi.service.GoodsService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,12 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class GoodsController {
 
     private final GoodsService goodsService;
+    private final GoodsRepository goodsRepository;
+    private final GoodsImgRepository goodsImgRepository;
 
     @GetMapping("/admin/goods/new")
     public String goodsForm(Model model){
@@ -49,7 +59,7 @@ public class GoodsController {
             return "goods/goodsForm";
         }
 
-        return "redirect:/";
+        return "redirect:/admin/goodsAll";
     }
 
     @GetMapping("/admin/goods/{goodsId}")
@@ -86,6 +96,25 @@ public class GoodsController {
             return "goods/goodsForm";
         }
 
-        return "redirect:/";
+        return "redirect:/admin/goodsAll";
+    }
+
+    @GetMapping(value={"/admin/goodsAll", "/admin/goodsAll/{page}"})
+    public String goodsManage(GoodsSearchDTO goodsSearchDTO,
+                              @PathVariable("page")Optional<Integer> page,
+                              Model model){
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get():0, 3);
+        Page<Goods> goodsAll = goodsService.getAdminGoodsPage(goodsSearchDTO, pageable);
+        model.addAttribute("goodsAll", goodsAll);
+        model.addAttribute("goodsSearchDTO", goodsSearchDTO);
+        model.addAttribute("maxPage", 5);
+        return "goods/goodsMng";
+    }
+
+    @PostMapping("/admin/goods/delete/{goodsId}")
+    public String goodsDelete(@PathVariable("goodsId") Long id){
+        goodsImgRepository.deleteByGoodsId(id);
+        goodsRepository.deleteById(id);
+        return "redirect:/admin/goodsAll";
     }
 }

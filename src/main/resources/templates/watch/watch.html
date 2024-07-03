@@ -33,8 +33,8 @@
                     </a>
                     <h5 class="card-title" th:text="${video.title}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="'아티스트: ' + ${video.author}"></h6>
-                    <p class="card-text text-muted fst-italic mb-2"
-                       th:text="|등록시간 ${#temporals.format(video.registerTime, 'yyyy-MM-dd HH:mm')}|"></p>
+                    <p class="card-text text-muted mb-2"
+                       th:text="|등록시간 ${#temporals.format(video.registerTime, 'yyyy년MM월dd일 HH시mm분ss초')}|"></p>
                 </div>
             </div>
         </section>

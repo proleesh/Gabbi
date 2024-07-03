@@ -61,7 +61,7 @@
                     <td th:text="${goods.goodsSellStatus.toString().equals('SELL')} ? '판매중' : '품절'">
                     </td>
                     <td th:text="${goods.createdBy}"></td>
-                    <td th:text="${goods.registerTime}"></td>
+                    <td th:text="|${#temporals.format(goods.registerTime, 'yyyy년MM월dd일 HH시mm분ss초')}|"></td>
                 </tr>
                 </tbody>
             </table>

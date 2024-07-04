@@ -2,6 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
+<th:block layout:fragment="css">
+  <style>
+    .carousel-inner > .item {
+      height: 350px;
+    }
+    .margin{
+      margin-bottom: 30px;
+    }
+    .card-text{
+      overflow: hidden;
+    }
+    a#a_style:hover {
+      background-image: linear-gradient(
+              to right,
+              #54b3d6,
+              #54b3d6 50%,
+              #000 50%
+      );
+      background-size: 200% 100%;
+      background-position: -100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease-in-out;
+    }
+    .center{
+      text-align: center;
+    }
+  </style>
+</th:block>
 <div layout:fragment="content">
   <br>
   <div id="carouselExampleIndicators" class="carousel slide">
@@ -30,6 +59,33 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+
+  <input type="hidden" name="searchQuery" th:value="${goodsSearchDTO.searchQuery}">
+  <div th:if="${not #strings.isEmpty(goodsSearchDTO.searchQuery)}" class="center">
+    <p class="h3 fw-bold" th:text="${goodsSearchDTO.searchQuery} + '검색 결과'">
+    </p>
+  </div>
+  <br>
+
+  <div class="row">
+    <th:block th:each="goods : ${goodsAll}">
+      <div class="col-md-4 margin">
+        <div class="card">
+          <a id="a_style" th:href="'/goods/' + ${goods.id}">
+            <img th:src="${goods.imageUrl}" class="card-img-top"
+            th:alt="${goods.goodsName}" height=auto width=auto>
+            <div class="card-body">
+              <h4 class="card-title">[[${goods.goodsName}]]</h4>
+              <p class="card-text">[[${goods.goodsDetail}]]</p>
+              <h3 class="card-title text-danger">[[${goods.price}]]원</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </th:block>
+  </div>
+
+
 
 </div>
 </html>

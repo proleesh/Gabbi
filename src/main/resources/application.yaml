@@ -1,6 +1,7 @@
 spring:
   application:
     name: Gabbi
+
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/gabbi
@@ -20,7 +21,6 @@ spring:
       max-request-size: 100GB
       enabled: true
 
-
   level:
     org:
       hibernate:
@@ -33,6 +33,7 @@ server:
 
 
 goodsImgLocation: src/main/resources/static/gabbi/images
-uploadPath: src/main/resources/static/gabbi/images/
+uploadPath: file:src/main/resources/static/gabbi/images/
 file:
   upload-dir: src/main/resources/static/videos
+videoUploadPath: file:src/main/resources/static/videos/

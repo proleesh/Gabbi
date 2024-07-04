@@ -38,6 +38,8 @@ public class SecurityConfig {
                 requestMatchers("/members/**",
                                 "/goods/**",
                                 "/images/**",
+                                "/gabbi/images/**",
+                                "/gabbi",
                                 "/**").permitAll()
                         .requestMatchers("/css/**",
                                 "/js/**",

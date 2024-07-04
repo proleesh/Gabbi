@@ -6,8 +6,11 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import org.proleesh.gabbi.constant.GoodsSellStatus;
 import org.proleesh.gabbi.dto.GoodsSearchDTO;
+import org.proleesh.gabbi.dto.MainGoodsDTO;
+import org.proleesh.gabbi.dto.QMainGoodsDTO;
 import org.proleesh.gabbi.entity.Goods;
 import org.proleesh.gabbi.entity.QGoods;
+import org.proleesh.gabbi.entity.QGoodsImg;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -80,6 +83,37 @@ public class GoodsRepositoryCustomImpl implements GoodsRepositoryCustom{
                 .fetchResults();
 
         List<Goods> content = results.getResults();
+        long total = results.getTotal();
+        return new PageImpl<>(content, pageable, total);
+    }
+
+    private BooleanExpression goodsNameLike(String searchQuery){
+        return StringUtils.isEmpty(searchQuery) ? null : QGoods.goods.goodsName.like("%" + searchQuery + "%");
+    }
+    @Override
+    public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable) {
+        QGoods goods = QGoods.goods;
+        QGoodsImg goodsImg = QGoodsImg.goodsImg;
+
+        QueryResults<MainGoodsDTO> results = queryFactory
+                .select(
+                        new QMainGoodsDTO(
+                                goods.id,
+                                goods.goodsName,
+                                goods.goodsDetail,
+                                goodsImg.imgUrl,
+                                goods.goodsPrice
+                        ))
+                .from(goodsImg)
+                .join(goodsImg.goods, goods)
+                .where(goodsImg.repImgYn.eq("Y"))
+                .where(goodsNameLike(goodsSearchDTO.getSearchQuery()))
+                .orderBy(goods.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<MainGoodsDTO> content = results.getResults();
         long total = results.getTotal();
         return new PageImpl<>(content, pageable, total);
     }

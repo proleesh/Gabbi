@@ -62,6 +62,7 @@ public class VideoController {
 
     @GetMapping("/watch")
     public String watchVideo(Model model, @RequestParam(value = "message", required = false) String message) {
+
         List<Video> videos = videoRepository.findAll();
         // 등록 순서 변환, 최신 Top
         videos = videos.stream()
@@ -146,6 +147,7 @@ public class VideoController {
         videoRepository.deleteById(id);
         return "redirect:/watch";
     }
+
 
 
 }

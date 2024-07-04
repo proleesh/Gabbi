@@ -14,9 +14,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Value("${uploadPath}")
     String uploadPath;
 
+    @Value("${videoUploadPath}")
+    String videoUploadDir;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations(uploadPath);
+        registry.addResourceHandler("/gabbi/images/**")
+                .addResourceLocations(uploadPath)
+                .setCachePeriod(0);
+        registry.addResourceHandler("/videos/**")
+                .addResourceLocations(videoUploadDir);
     }
 }

@@ -32,6 +32,8 @@ public class GoodsController {
     private final GoodsRepository goodsRepository;
     private final GoodsImgRepository goodsImgRepository;
 
+
+
     @GetMapping("/admin/goods/new")
     public String goodsForm(Model model){
         model.addAttribute("goodsFormDTO", new GoodsFormDTO());

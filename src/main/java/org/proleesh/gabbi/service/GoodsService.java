@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.proleesh.gabbi.dto.GoodsFormDTO;
 import org.proleesh.gabbi.dto.GoodsImgDTO;
 import org.proleesh.gabbi.dto.GoodsSearchDTO;
+import org.proleesh.gabbi.dto.MainGoodsDTO;
 import org.proleesh.gabbi.entity.Goods;
 import org.proleesh.gabbi.entity.GoodsImg;
 import org.proleesh.gabbi.repository.GoodsImgRepository;
@@ -99,6 +100,11 @@ public class GoodsService {
     @Transactional(readOnly = true)
     public Page<Goods> getAdminGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
         return goodsRepository.getAdminGoodsPage(goodsSearchDTO, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
+        return goodsRepository.getMainGoodsPage(goodsSearchDTO, pageable);
     }
 
 }

@@ -34,7 +34,7 @@ public class GoodsImgService {
         // 파일 업로드
         if(!StringUtils.isEmpty(oriImgName)){
             imgName = fileService.uploadFile(goodsImgLocation, oriImgName, goodsImgFile.getBytes());
-            imgUrl = "/images/goods/" + imgName;
+            imgUrl = "/gabbi/images/" + imgName;
         }
         // 상품 이미지 정보 저장
         goodsImg.updateItemImg(oriImgName, imgName, imgUrl);
@@ -54,7 +54,7 @@ public class GoodsImgService {
             String oriImgName = goodsImgFile.getOriginalFilename();
             String imgName = fileService.uploadFile(goodsImgLocation,
                     oriImgName, goodsImgFile.getBytes());
-            String imgUrl = "/images/goods/" + imgName;
+            String imgUrl = "/gabbi/images/" + imgName;
             savedGoodsImg.updateItemImg(oriImgName, imgName, imgUrl);
         }
     }

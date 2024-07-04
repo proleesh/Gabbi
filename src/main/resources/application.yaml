@@ -20,7 +20,7 @@ spring:
       max-request-size: 100GB
       enabled: true
 
-logging:
+
   level:
     org:
       hibernate:
@@ -29,6 +29,7 @@ logging:
             sql: trace
 server:
   port: 80
+
 
 
 goodsImgLocation: src/main/resources/static/gabbi/images

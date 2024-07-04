@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
@@ -35,12 +36,17 @@ public class VideoController {
     public VideoController(@Value("${file.upload-dir}") String uploadDir, VideoRepository videoRepository) {
         this.videoLocation = Paths.get(uploadDir);
         this.videoRepository = videoRepository;
+        try {
+            Files.createDirectories(this.videoLocation);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not create upload directory", e);
+        }
     }
 
     @GetMapping("/video/{filename}")
     public ResponseEntity<Resource> getVideo(@PathVariable String filename) {
         try {
-            Path file = videoLocation.resolve(filename);
+            Path file = videoLocation.resolve(filename).normalize();
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() && resource.isReadable()) {
                 return ResponseEntity.ok()

@@ -10,17 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author sung-hyuklee
@@ -58,6 +57,11 @@ public class VideoController {
     @GetMapping("/watch")
     public String watchVideo(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Video> videos = videoRepository.findAll();
+        // 등록 순서 변환, 최신 Top
+        videos = videos.stream()
+                .sorted(Comparator.comparing(Video::getRegisterTime)
+                        .reversed())
+                .collect(Collectors.toList());
         model.addAttribute("videos", videos);
         model.addAttribute("message", message);
         return "watch/watch";
@@ -94,7 +98,7 @@ public class VideoController {
         try {
             if (file.isEmpty()) {
                 redirectAttributes.addFlashAttribute("message", "업로드할 파일을 선택하세요!");
-                return "redirect:/upload";
+                return "redirect:/watch/upload";
             }
             String originalFilename = file.getOriginalFilename();
 
@@ -108,7 +112,7 @@ public class VideoController {
 
             if (underscoreIndex == -1 || dotIndex == -1 || underscoreIndex >= dotIndex) {
                 redirectAttributes.addFlashAttribute("message", "동영상 파일 이름은 'author_title.*' 형식이어야 합니다.");
-                return "redirect:/upload";
+                return "redirect:/watch/upload";
             }
 
             String author = originalFilename.substring(0, underscoreIndex);
@@ -128,7 +132,7 @@ public class VideoController {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("message",
                     "Failed to upload '" + file.getOriginalFilename() + "' due to " + e.getMessage());
-            return "redirect:/upload";
+            return "redirect:/watch/upload";
         }
     }
     @PostMapping("/watch/delete/{id}")
@@ -136,4 +140,6 @@ public class VideoController {
         videoRepository.deleteById(id);
         return "redirect:/watch";
     }
+
+
 }

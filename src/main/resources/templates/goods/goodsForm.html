@@ -55,11 +55,8 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-        <div class="row">
-            <div class="col">
                 <h1><img th:src="@{/img/new-goods.png}" width="50" height="50">&nbsp;상품 등록</h1>
-            </div>
-            <div class="col">
+
                 <form th:unless="${#strings.isEmpty(goodsFormDTO.id)}"
                       th:action="@{/admin/goods/delete/{id}(id=${goodsFormDTO.id})}" method="post"
                       onsubmit="return confirm(`정말로 삭제할까요?`);">
@@ -67,8 +64,6 @@
                             sec:authorize="isAuthenticated()">삭제
                     </button>
                 </form>
-            </div>
-        </div>
         <form role="form" method="post" enctype="multipart/form-data"
               th:object="${goodsFormDTO}">
 

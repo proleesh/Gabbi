@@ -5,6 +5,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title th:text="${videoTitle}"></title>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 </head>
 <div layout:fragment="content">
     <div class="container">
@@ -12,7 +14,10 @@
         <h1 class="my-4" th:text="${videoTitle}">WATCH</h1>
         <hr>
         <div class="ratio ratio-16x9">
-            <iframe th:src="@{${videoUrl}}" title="Video" allowfullscreen></iframe>
+            <video id="player" style="--plyr-color-main: #1ac266;" playsinline controls>
+                <source th:src="@{${videoUrl}}" type="video/mp4" />
+                <source th:src="@{${videoUrl}}" type="video/webm" />
+            </video>
         </div>
         <hr>
         <h4 th:text="'아티스트: ' + ${videoAuthor}"></h4>

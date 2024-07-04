@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="header">
 
-    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #00dbbf">
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #faff00">
         <div class="container-fluid">
             <a href="/"><img th:src="@{/img/gabbi.png}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top"></a>
             &nbsp;
@@ -23,9 +23,7 @@
                             기타
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/qna-all"><img th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A 질문현황</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/about">About</a></li>
+                            <li><a class="dropdown-item" href="/about"><img th:src="@{/img/about.png}" width="25" height="25">&nbsp;About</a></li>
                         </ul>
                     </li>
 
@@ -51,6 +49,9 @@
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/orders"><img th:src="@{/img/shopping-history.png}" width="25" height="25">&nbsp;구매이력</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/qna-all"><img th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A 질문현황</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAnonymous()">
                         <a class="nav-link" href="/members/login">로그인</a>

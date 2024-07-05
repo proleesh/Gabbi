@@ -15,8 +15,8 @@
                     <input type="hidden" id="qna-id" th:value="${qna.id}">
                     <header>
                         <h1 class="fw-bolder mg-1" th:text="${qna.qnaTitle}"></h1>
-                        <div class="text-muted fst-italic mb-2"
-                             th:text="|Posted on ${#temporals.format(qna.registerTime, 'yyyy-MM-dd HH:mm')}|"></div>
+                        <div class="text-muted mb-2"
+                             th:text="|발표시간: ${#temporals.format(qna.registerTime, 'yyyy년MM월dd일 HH시mm분ss초')}|"></div>
                     </header>
                     <br>
                     <section>

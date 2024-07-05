@@ -85,6 +85,35 @@
     </th:block>
   </div>
 
+  <div th:with="start=${(goodsAll.number/maxPage)*maxPage + 1},
+             end=(${(goodsAll.totalPages == 0) ? 1 : (start + (maxPage - 1)
+              < goodsAll.totalPages ? start + (maxPage - 1) : goodsAll.totalPages)})">
+    <ul class="pagination pagination-sm justify-content-center">
+      <li class="page-item" th:classappend="${goodsAll.number eq 0} ? 'disabled':''">
+        <a th:href="@{'/' + '?searchQuery=' +
+         ${goodsSearchDTO.searchQuery} + '&page=' +
+         ${goodsAll.number - 1}}" aria-label="Previous"
+           class="page-link">
+          <span aria-label="true">Previous</span>
+        </a>
+      </li>
+      <li class="page-item" th:each="page: ${#numbers.sequence(start,end)}"
+          th:classappend="${goodsAll.number eq page - 1}? 'active':''">
+        <a th:href="@{'/' + '?searchQuery=' + ${goodsSearchDTO.searchQuery} + '&page' +
+${page - 1}}"
+           th:inline="text" class="page-link">
+          [[${page}]]
+        </a>
+      </li>
+      <li class="page-item" th:classappend="${goodsAll.number + 1 ge goodsAll.totalPages}?'disabled':''">
+        <a th:href="@{'/' + '?searchQuery=' + ${goodsSearchDTO.searchQuery} +
+        '&page=' + ${goodsAll.number + 1}}"
+           aria-label="Next" class="page-link">
+          <span aria-hidden="true">Next</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 
 
 </div>

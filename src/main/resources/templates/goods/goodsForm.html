@@ -27,7 +27,7 @@
                     && fileExt !== 'gif'
                     && fileExt !== 'png'
                     && fileExt !== 'bmp'
-                    && fileExt !== 'heic'
+                    && fileExt !== 'gif'
                 ) {
                     alert('이미지 파일만 등록이 가능합니다.');
                     return;
@@ -55,15 +55,8 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-                <h1><img th:src="@{/img/new-goods.png}" width="50" height="50">&nbsp;상품 등록</h1>
+        <h1><img th:src="@{/img/new-goods.png}" width="50" height="50">&nbsp;상품 등록</h1>
 
-                <form th:unless="${#strings.isEmpty(goodsFormDTO.id)}"
-                      th:action="@{/admin/goods/delete/{id}(id=${goodsFormDTO.id})}" method="post"
-                      onsubmit="return confirm(`정말로 삭제할까요?`);">
-                    <button type="submit" class="btn btn-danger btn-lg rounded-pill px-3"
-                            sec:authorize="isAuthenticated()">삭제
-                    </button>
-                </form>
         <form role="form" method="post" enctype="multipart/form-data"
               th:object="${goodsFormDTO}">
 
@@ -126,29 +119,52 @@
 
             <div th:if="${#strings.isEmpty(goodsFormDTO.id)}" style="text-align: center"
                  sec:authorize="isAuthenticated()">
-                <button th:action="@{/admin/goods/new}" type="submit" class="btn btn-primary btn-lg rounded-pill px-3">
-                    저장
-                </button>
-                <a class="btn btn-secondary btn-lg rounded-pill px-3" href="/admin/goods/new">취소</a>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-4 mb-2">
+                        <button th:action="@{/admin/goods/new}" type="submit"
+                                class="btn btn-primary btn-lg rounded-pill px-3 w-100">
+                            저장
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-4 mb-2">
+                        <a class="btn btn-secondary btn-lg rounded-pill px-3 w-100" href="/admin/goods/new">취소</a>
+                    </div>
+                </div>
             </div>
 
             <div th:unless="${#strings.isEmpty(goodsFormDTO.id)}" style="text-align: center"
                  sec:authorize="isAuthenticated()">
-                <button th:action="@{'/admin/goods/' + ${goodsFormDTO.id}}" type="submit"
-                        class="btn btn-primary btn-lg rounded-pill px-3">
-                    수정
-                </button>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-4 mb-2">
+                        <button th:action="@{'/admin/goods/' + ${goodsFormDTO.id}}" type="submit"
+                                class="btn btn-primary btn-lg rounded-pill px-3 w-100">
+                            수정
+                        </button>
+                    </div>
+
+                    <div class="col-12 col-md-4 mb-2">
+                        <a class="btn btn-secondary btn-lg rounded-pill px-3 w-100" href="/admin/goodsAll">돌아가기</a>
 
 
-                <a class="btn btn-secondary btn-lg rounded-pill px-3" href="/admin/goodsAll">돌아가기</a>
+                    </div>
+                </div>
+
+
+                <!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
 
             </div>
-
-
-            <!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
-
         </form>
-
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-4 mb-2">
+                <form th:unless="${#strings.isEmpty(goodsFormDTO.id)}"
+                      th:action="@{/admin/goods/delete/{id}(id=${goodsFormDTO.id})}" method="post"
+                      onsubmit="return confirm(`정말로 삭제할까요?`);">
+                    <button type="submit" class="btn btn-danger btn-lg rounded-pill px-3 w-100"
+                            sec:authorize="isAuthenticated()">삭제
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

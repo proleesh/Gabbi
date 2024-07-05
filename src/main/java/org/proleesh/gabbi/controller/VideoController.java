@@ -1,7 +1,9 @@
 package org.proleesh.gabbi.controller;
 
 import org.proleesh.gabbi.entity.Video;
+import org.proleesh.gabbi.entity.VideoComment;
 import org.proleesh.gabbi.repository.VideoRepository;
+import org.proleesh.gabbi.service.VideoCommentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -32,8 +34,9 @@ public class VideoController {
 
     private final Path videoLocation;
     private final VideoRepository videoRepository;
+    private final VideoCommentService videoCommentService;
 
-    public VideoController(@Value("${file.upload-dir}") String uploadDir, VideoRepository videoRepository) {
+    public VideoController(@Value("${file.upload-dir}") String uploadDir, VideoRepository videoRepository, VideoCommentService videoCommentService) {
         this.videoLocation = Paths.get(uploadDir);
         this.videoRepository = videoRepository;
         try {
@@ -41,6 +44,7 @@ public class VideoController {
         } catch (IOException e) {
             throw new RuntimeException("Could not create upload directory", e);
         }
+        this.videoCommentService = videoCommentService;
     }
 
     @GetMapping("/video/{filename}")
@@ -83,15 +87,19 @@ public class VideoController {
                 .orElse(null);
 
         if (video != null) {
+        List<VideoComment> videoComments = videoCommentService.getCommentsByVideoName(video.getTitle());
             model.addAttribute("videoUrl", "/video/" + filename);
             model.addAttribute("videoTitle", video.getTitle());
             model.addAttribute("videoAuthor", video.getAuthor());
             model.addAttribute("videoDate", video.getRegisterTime());
             model.addAttribute("videoId", video.getId());
+            model.addAttribute("videoCreateBy", video.getCreatedBy());
+            model.addAttribute("videoComments", videoComments);
             return "watch/watchVideo";
         } else {
             return "redirect:/watch";
         }
+
     }
 
     @GetMapping("/watch/upload")
@@ -142,12 +150,12 @@ public class VideoController {
             return "redirect:/watch/upload";
         }
     }
+
     @PostMapping("/watch/delete/{id}")
-    public String deleteVideo(@PathVariable Long id){
+    public String deleteVideo(@PathVariable Long id) {
         videoRepository.deleteById(id);
         return "redirect:/watch";
     }
-
 
 
 }

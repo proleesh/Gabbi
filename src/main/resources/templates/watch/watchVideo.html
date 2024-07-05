@@ -13,7 +13,7 @@
         <hr>
         <div class="ratio ratio-16x9">
             <video playsinline controls>
-                <source th:src="@{${videoUrl}}" type="video/mp4" />
+                <source th:src="@{${videoUrl}}" type="video/mp4"/>
             </video>
         </div>
         <hr>
@@ -23,9 +23,58 @@
 
         <form th:action="@{/watch/delete/{id}(id=${videoId})}" method="post" onsubmit="return confirm('정말로 삭제할까요?');">
             <button type="submit" class="btn btn-danger mt-3" sec:authorize="isAuthenticated()">삭제</button>
-        <a class="btn btn-secondary mt-3" href="/watch">돌아가기</a>
+            <a class="btn btn-secondary mt-3" href="/watch">돌아가기</a>
         </form>
     </div>
+
+    <br>
+    <h2><img th:src="@{/img/comment.png}" width="25" height="25">&nbsp;댓글</h2>
+    <!-- 댓글 Form -->
+    <div>
+        <h3>댓글 작성</h3>
+        <textarea class="form-control" id="new-comment-content" rows="3" placeholder="댓글을 입력하세요..."></textarea>
+        <input type="hidden" id="video-name" th:value="${videoTitle}">
+        <button type="button" class="btn btn-light mt-2" id="submit-comment-btn">
+            <img th:src="@{/img/comment.png}" width="15" height="15">&nbsp;댓글 달기
+        </button>
+    </div>
+    <br>
+
+    <br>
+    <div class="list-group-item">
+        <div th:each="videoComment : ${videoComments}">
+            <div class="comment" th:attr="data-comment-id=${videoComment.id}">
+                <p><img th:src="@{/img/comment.png}" width="15" height="15">&nbsp;<strong
+                        th:text="${videoComment.author}"></strong> <span th:text="${videoComment.content}"></span></p>
+                <p class="text-muted"
+                   th:text="|댓글시간: ${#temporals.format(videoComment.registerTime, 'yyyy년MM월dd일 HH시mm분')}|"></p>
+                <button type="button" class="btn btn-link reply-btn" sec:authorize="isAuthenticated()">답글</button>
+
+                <!-- 답글 Form -->
+                <div class="reply-form" style="display: none;">
+                    <textarea class="form-control reply-content" rows="2" placeholder="답글을 입력하세요..."></textarea>
+                    <br>
+                    <button type="button" class="btn btn-light submit-reply-btn"><img th:src="@{/img/reply.png}"
+                                                                                      width="15" height="15">&nbsp;답글 달기
+                    </button>
+                </div>
+
+                <!-- 답글 -->
+                <div class="replies" th:each="reply : ${videoComment.videoReplies}">
+                    <div class="reply" th:attr="data-reply-id=${reply.id}">
+                        <p><img th:src="@{/img/reply.png}" width="15" height="15">&nbsp;<strong
+                                th:text="${reply.author}"></strong> <span th:text="${reply.content}"></span></p>
+                        <p class="text-muted"
+                           th:text="|답글시간: ${#temporals.format(reply.registerTime, 'yyyy년MM월dd일 HH시mm분')}|"></p>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+
+
+    <script th:src="@{/js/watch.js}"></script>
 </div>
 
 </html>

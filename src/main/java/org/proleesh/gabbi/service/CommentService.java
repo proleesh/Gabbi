@@ -34,4 +34,5 @@ public class CommentService {
     public List<Comment> getCommentsByQnaId(Long qnaId){
         return commentRepository.findByQnaId(qnaId);
     }
+
 }

@@ -3,7 +3,9 @@ package org.proleesh.gabbi.controller;
 import lombok.RequiredArgsConstructor;
 import org.proleesh.gabbi.dto.QnAListViewDTO;
 import org.proleesh.gabbi.dto.QnAViewDTO;
+import org.proleesh.gabbi.entity.Comment;
 import org.proleesh.gabbi.entity.QnA;
+import org.proleesh.gabbi.service.CommentService;
 import org.proleesh.gabbi.service.QnAService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QnAController {
     private final QnAService qnAService;
+    private final CommentService commentService;
 
     @GetMapping("/qna-all")
     public String getQnAAll(Model model) {
@@ -31,7 +34,9 @@ public class QnAController {
     @GetMapping("/qna-all/{id}")
     public String getQnA(@PathVariable Long id, Model model) {
         QnA qna = qnAService.findById(id);
+        List<Comment> comments = commentService.getCommentsByQnaId(id);
         model.addAttribute("qna", new QnAViewDTO(qna));
+        model.addAttribute("comments", comments);
         return "others/qna";
     }
 

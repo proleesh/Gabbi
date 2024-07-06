@@ -40,7 +40,7 @@
               th:object="${goodsAll}">
             <h1><img th:src="@{/img/shop-manage.png}" width="50" height="50">&nbsp;상품 관리</h1>
             <hr>
-            <table class="table">
+            <table class="table" sec:authorize="isAuthenticated()">
                 <thead>
                 <tr>
                     <td>상품아이디</td>
@@ -67,7 +67,7 @@
             </table>
             <div th:with="start=${(goodsAll.number/maxPage)*maxPage + 1},
              end=(${(goodsAll.totalPages == 0) ? 1 : (start + (maxPage - 1)
-              < goodsAll.totalPages ? start + (maxPage - 1) : goodsAll.totalPages)})">
+              < goodsAll.totalPages ? start + (maxPage - 1) : goodsAll.totalPages)})" sec:authorize="isAuthenticated()">
                 <ul class="pagination pagination-sm justify-content-center">
                     <li class="page-item" th:classappend="${goodsAll.first} ? 'disabled'">
                         <a th:onclick="'javascript:page(' + ${goodsAll.number - 1} + ')'" aria-label="Previous"
@@ -91,7 +91,7 @@
                 </ul>
             </div>
 
-            <div class="row row-cols-lg-auto g-3 justify-content-center" th:object="${goodsSearchDTO}">
+            <div class="row row-cols-lg-auto g-3 justify-content-center" th:object="${goodsSearchDTO}" sec:authorize="isAuthenticated()">
                 <select th:field="*{searchDateType}" class="form-control" style="width: auto;">
                     <option value="all">전체기간</option>
                     <option value="1d">1일</option>
@@ -99,12 +99,12 @@
                     <option value="1m">1개월</option>
                     <option value="6m">6개월</option>
                 </select>
-                <select th:field="*{searchSellStatus}" class="form-control" style="width: auto;">
+                <select th:field="*{searchSellStatus}" class="form-control" style="width: auto;" sec:authorize="isAuthenticated()">
                     <option value="">판매상태(전체)</option>
                     <option value="SELL">판매</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
-                <select th:field="*{searchBy}" class="form-control" style="width:auto;">
+                <select th:field="*{searchBy}" class="form-control" style="width:auto;" sec:authorize="isAuthenticated()">
                     <option value="goodsName">상품명</option>
                     <option value="createdBy">등록자</option>
                 </select>
@@ -112,7 +112,8 @@
                 <input th:field="*{searchQuery}"
                        type="text"
                        class="form-control"
-                       placeholder="검색어를 입력해주세요">
+                       placeholder="검색어를 입력해주세요"
+                       sec:authorize="isAuthenticated()">
                 <button id="searchBtn" type="submit" class="btn btn-light">검색</button>
             </div>
         </form>

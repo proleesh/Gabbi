@@ -87,7 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 location.reload(); // 댓글 목록을 업데이트하는 로직을 교체
             }).catch(error => {
                 console.error('Error adding comment:', error);
-                alert('댓글을 추가하는데 실패했습니다.');
+                alert('댓글을 추가할려면 로그인하세요.');
+                location.replace("/members/login")
             });
         });
     }
@@ -104,10 +105,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // 답장 from 표시
             replyForm.style.display = 'block';
         }
+            event.preventDefault();
 
         // 답글 달기 처리
         if (event.target.classList.contains('submit-reply-btn')) {
-            event.preventDefault();
 
             const comment = event.target.closest('.comment');
             const replyContent = event.target.parentElement.querySelector('.reply-content').value;

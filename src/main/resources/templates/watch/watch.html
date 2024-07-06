@@ -43,7 +43,7 @@
                     <p class="card-subtitle mb-2 text-muted" th:text="'아티스트: ' + ${video.author}"></p>
                     </div>
                     <div class="col">
-                    <p class="card-text text-muted mb-2"
+                    <p class="card-text text-muted mb-2" sec:authorize="isAuthenticated()"
                        th:text="|등록시간 ${#temporals.format(video.registerTime, 'yyyy년MM월dd일 HH시mm분ss초')}|"></p>
                     </div>
 

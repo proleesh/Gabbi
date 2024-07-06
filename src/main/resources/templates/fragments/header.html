@@ -20,10 +20,22 @@
 
                     <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                            기타
+                            <img th:src="@{/img/certificate.png}" width="25" height="25">&nbsp;기타
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/about"><img th:src="@{/img/about.png}" width="25" height="25">&nbsp;About</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                            <img th:src="@{/img/manager.png}" width="25" height="25">&nbsp;관리자용
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/watch/upload"><img th:src="@{/img/video-upload.png}" width="25" height="25">&nbsp;Watch 업로드</a></li>
+                            <li><a class="dropdown-item" href="/admin/goods/new"><img th:src="@{/img/new-goods.png}" width="25" height="25">&nbsp;상품 등록</a></li>
+                            <li><a class="dropdown-item" href="/admin/goodsAll"><img th:src="@{/img/shop-manage.png}" width="25" height="25">&nbsp;상품 관리</a></li>
+                            <li><a class="dropdown-item" href="/qna-all"><img th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A 질문현황</a></li>
                         </ul>
                     </li>
 
@@ -32,26 +44,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/watch"><img th:src="@{/img/video.png}" width="25" height="25">&nbsp;WATCH</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/qna-all"><img th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A 질문하기</a>
+                    </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/chat"><img th:src="@{/img/chat.png}" width="25" height="25">&nbsp;CHAT</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/watch/upload"><img th:src="@{/img/video-upload.png}" width="25" height="25">&nbsp;WATCH 업로드</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/admin/goods/new"><img th:src="@{/img/new-goods.png}" width="25" height="25">&nbsp;상품 등록</a></a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/admin/goodsAll"><img th:src="@{/img/shop-manage.png}" width="25" height="25">&nbsp;상품 관리</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/cart"><img th:src="@{/img/shopping-cart.png}" width="25" height="25">&nbsp;장바구니</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/orders"><img th:src="@{/img/shopping-history.png}" width="25" height="25">&nbsp;구매이력</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/qna-all"><img th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A 질문현황</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAnonymous()">
                         <a class="nav-link" href="/members/login">로그인</a>
@@ -60,7 +63,7 @@
                         <a class="nav-link" href="/members/logout">로그아웃</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search" th:action="@{/}" method="get">
+                <form class="d-flex" role="search" th:action="@{/}" method="get" sec:authorize="isAuthenticated()">
                     <input name="searchQuery" class="form-control me-2" type="search" placeholder="검색하기"
                            aria-label="Search">
                     <button class="btn btn-outline-success" type="submit"><img th:src="@{/img/search.png}" width="25" height="25"></button>

@@ -48,9 +48,9 @@
             </form>
         </div>
     </div>
-    <script th:src="@{/js/chat.js}"></script>
-    <script th:src="@{/webjars/sockjs-client/1.6.1/dist/sockjs.min.js}"></script>
-    <script th:src="@{/webjars/stomp-websocket/2.3.4/stomp.min.js}"></script>
+    <script sec:authorize="isAuthenticated()" th:src="@{/js/chat.js}"></script>
+    <script sec:authorize="isAuthenticated()" th:src="@{/webjars/sockjs-client/1.6.1/dist/sockjs.min.js}"></script>
+    <script sec:authorize="isAuthenticated()" th:src="@{/webjars/stomp-websocket/2.3.4/stomp.min.js}"></script>
 
 </div>
 </html>

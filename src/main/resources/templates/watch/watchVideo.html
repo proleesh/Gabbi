@@ -5,17 +5,26 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title th:text="${videoTitle}"></title>
+    <link rel="stylesheet" th:href="@{/css/plyr.css}"/>
+    <script th:src="@{/js/plyr.polyfilled.js}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const player = new Plyr('.player');
+            window.player = player;
+        });
+    </script>
+
 </head>
 <div layout:fragment="content">
     <div class="container">
         <br>
         <h1 class="my-4" th:text="${videoTitle}">WATCH</h1>
         <hr>
-        <div class="ratio ratio-16x9">
-            <video playsinline controls>
-                <source th:src="@{${videoUrl}}" type="video/mp4"/>
+            <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls>
+                <source th:src="@{${videoUrl}}" type="video/mp4" size="1080"/>
+                <source th:src="@{${videoUrl}}" type="video/mp4" size="720"/>
+                <source th:src="@{${videoUrl}}" type="video/mp4" size="360"/>
             </video>
-        </div>
         <hr>
         <h4 th:text="'아티스트: ' + ${videoAuthor}"></h4>
         <div class="text-muted mb-2" sec:authorize="isAuthenticated()"

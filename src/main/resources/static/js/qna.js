@@ -105,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // 답장 from 표시
             replyForm.style.display = 'block';
         }
-            event.preventDefault();
 
         // 답글 달기 처리
         if (event.target.classList.contains('submit-reply-btn')) {

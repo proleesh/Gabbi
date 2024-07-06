@@ -40,7 +40,7 @@
     <br>
     <h2><img th:src="@{/img/comment.png}" width="25" height="25">&nbsp;댓글</h2>
     <!-- 댓글 Form -->
-    <div sec:authorize="isAuthenticated()">
+    <div>
         <h3>댓글 작성</h3>
         <textarea class="form-control" id="new-comment-content" rows="3" placeholder="댓글을 입력하세요..."></textarea>
         <button type="button" class="btn btn-light mt-2" id="submit-comment-btn"><img th:src="@{/img/comment.png}" width="15" height="15">&nbsp;댓글 달기</button>

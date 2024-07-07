@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
 <head>
-  <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <div layout:fragment="content">
     <br>
@@ -18,7 +18,7 @@
     <div class="row">
         <th:block th:each="goods : ${goodsAll}">
             <div class="col-md-4 margin">
-                <div class="card" style="background-color: #9e9c9c">
+                <div class="card mb-4" style="background-color: #9e9c9c">
                     <a th:href="'/goods/' + ${goods.id}">
                         <img th:src="${goods.imageUrl}" class="card-img-top"
                              th:alt="${goods.goodsName}" height=auto width=auto>
@@ -32,47 +32,46 @@
                             </div>
                             <p id="goodsDetail" class="card-text">[[${goods.goodsDetail}]]</p>
                             <button>
-                                <a th:href="'/goods/' + ${goods.id}" class="btn2"><span class="spn2">[[${goods.price}]]원</span></a>
+                                <a th:href="'/goods/' + ${goods.id}" class="btn2"><span
+                                        class="spn2">[[${goods.price}]]원</span></a>
                             </button>
                         </div>
                     </a>
                 </div>
-                </a>
             </div>
+        </th:block>
     </div>
-    </th:block>
-</div>
+    <br>
 
-<div th:with="start=${(goodsAll.number/maxPage)*maxPage + 1},
+
+    <div th:with="start=${(goodsAll.number/maxPage)*maxPage + 1},
              end=(${(goodsAll.totalPages == 0) ? 1 : (start + (maxPage - 1)
               < goodsAll.totalPages ? start + (maxPage - 1) : goodsAll.totalPages)})">
-    <ul class="pagination pagination-sm justify-content-center">
-        <li class="page-item" th:classappend="${goodsAll.number eq 0} ? 'disabled':''">
-            <a th:href="@{'/' + '?searchQuery=' +
+        <ul class="pagination pagination-sm justify-content-center">
+            <li class="page-item" th:classappend="${goodsAll.number eq 0} ? 'disabled':''">
+                <a th:href="@{'/' + '?searchQuery=' +
          ${goodsSearchDTO.searchQuery} + '&page=' +
          ${goodsAll.number - 1}}" aria-label="Previous"
-               class="page-link">
-                <span aria-label="true">Previous</span>
-            </a>
-        </li>
-        <li class="page-item" th:each="page: ${#numbers.sequence(start,end)}"
-            th:classappend="${goodsAll.number eq page - 1}? 'active':''">
-            <a th:href="@{'/' + '?searchQuery=' + ${goodsSearchDTO.searchQuery} + '&page' +
+                   class="page-link">
+                    <span aria-label="true">Previous</span>
+                </a>
+            </li>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start,end)}"
+                th:classappend="${goodsAll.number eq page - 1}? 'active':''">
+                <a th:href="@{'/' + '?searchQuery=' + ${goodsSearchDTO.searchQuery} + '&page' +
 ${page - 1}}"
-               th:inline="text" class="page-link">
-                [[${page}]]
-            </a>
-        </li>
-        <li class="page-item" th:classappend="${goodsAll.number + 1 ge goodsAll.totalPages}?'disabled':''">
-            <a th:href="@{'/' + '?searchQuery=' + ${goodsSearchDTO.searchQuery} +
+                   th:inline="text" class="page-link">
+                    [[${page}]]
+                </a>
+            </li>
+            <li class="page-item" th:classappend="${goodsAll.number + 1 ge goodsAll.totalPages}?'disabled':''">
+                <a th:href="@{'/' + '?searchQuery=' + ${goodsSearchDTO.searchQuery} +
         '&page=' + ${goodsAll.number + 1}}"
-               aria-label="Next" class="page-link">
-                <span aria-hidden="true">Next</span>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
+                   aria-label="Next" class="page-link">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
 </html>

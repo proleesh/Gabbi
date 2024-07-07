@@ -17,7 +17,7 @@ import java.util.List;
  * 댓글 rest api
  */
 @RestController
-@RequestMapping(value = "/api/videoComments", method = RequestMethod.POST)
+@RequestMapping(value = "/api/videoComments")
 @RequiredArgsConstructor
 public class VideoCommentRestController {
 

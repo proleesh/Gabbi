@@ -55,6 +55,7 @@ public class VideoController {
             if (resource.exists() && resource.isReadable()) {
                 return ResponseEntity.ok()
                         .header(HttpHeaders.CONTENT_TYPE, "video/mp4")
+                        .header(HttpHeaders.CONTENT_TYPE, "video/mkv")
                         .body(resource);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

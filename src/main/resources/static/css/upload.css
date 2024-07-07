@@ -1,52 +1,26 @@
-.main-container {
-    padding: 5px;
+.shadow__btn {
+    padding: 10px 20px;
+    border: none;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 7px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.5s;
+    transition-property: box-shadow;
 }
 
-.box {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(6, minmax(100px, 1fr));
+.shadow__btn {
+    background: rgb(0,140,255);
+    box-shadow: 0 0 25px rgb(0,140,255);
 }
 
-.box a {
-    transition: transform .3s;
-}
-
-.box a:hover {
-    transition: transform .3s;
-    -ms-transform: scale(1.4);
-    transform: scale(1.4);
-}
-.box video {
-    border-radius: 15px;
-}
-@media(max-width: 900px) {
-    .box {
-        display: grid;
-        grid-gap: 20px;
-        grid-template-columns: repeat(4, minmax(100px, 1fr));
-    }
-}
-@media(max-width: 700px) {
-    .box {
-        display: grid;
-        grid-gap: 20px;
-        grid-template-columns: repeat(3, minmax(100px, 1fr));
-    }
-}
-@media(max-width: 500px) {
-    .box {
-        display: grid;
-        grid-gap: 20px;
-        grid-template-columns: repeat(1, 1fr);
-        text-align: center;
-    }
-
-    .box a:hover {
-        transition: transform .3s;
-        -ms-transform: scale(1);
-        transform: scale(1.2);
-    }
+.shadow__btn:hover {
+    box-shadow: 0 0 5px rgb(0,140,255),
+    0 0 25px rgb(0,140,255),
+    0 0 50px rgb(0,140,255),
+    0 0 100px rgb(0,140,255);
 }
 
 button {
@@ -135,33 +109,4 @@ button:hover .circle .icon.arrow {
 
 button:hover .button-text {
     color: #fff;
-}
-
-.comic-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background-color: #ff5252;
-    border: 2px solid #000;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0px #000;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.comic-button:hover {
-    background-color: #fff;
-    color: #ff5252;
-    border: 2px solid #ff5252;
-    box-shadow: 5px 5px 0px #ff5252;
-}
-
-.comic-button:active {
-    background-color: #fcf414;
-    box-shadow: none;
-    transform: translateY(4px);
 }

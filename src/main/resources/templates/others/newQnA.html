@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
-
+<head>
+    <link rel="stylesheet" th:href="@{/css/qna-del.css}"/>
+</head>
 <div layout:fragment="content">
     <div class="container">
         <br>
@@ -24,16 +26,35 @@
                                   id="qnaContent" th:text="${qna.qnaContent}"></textarea>
                     </section>
                     <br/>
-                    <button th:if="${qna.id} != null" type="button" id="modify-btn"
-                            class="btn btn-primary btn-lg">
-                        수정
-                    </button>
-                    <button th:if="${qna.id} == null" type="button" id="create-btn"
-                            class="btn btn-danger btn-lg">
-                        등록
-                    </button>
-                    <a class="btn btn-secondary btn-lg" href="/qna-all">돌아가기</a>
-
+                    <div class="row">
+                        <div class="col">
+                            <button th:if="${qna.id} != null" type="button" id="modify-btn"
+                                    class="button">
+                                수정
+                                <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                                    <path clip-rule="evenodd"
+                                          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                                          fill-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button th:if="${qna.id} == null" type="button" id="create-btn"
+                                    class="registerBtn">
+                                등록
+                            </button>
+                        </div>
+                        <div class="col">
+                            <a id="comeback" th:href="@{/qna-all/{id}(id=${qna.id})}">
+                                <button class="learn-more">
+  <span class="circle" aria-hidden="true">
+  <span class="icon arrow"></span>
+  </span>
+                                    <span class="button-text">돌아가기</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                 </article>
             </div>
         </div>

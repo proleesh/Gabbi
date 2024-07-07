@@ -6,13 +6,8 @@
 <head>
     <title th:text="${videoTitle}"></title>
     <link rel="stylesheet" th:href="@{/css/plyr.css}"/>
+    <link rel="stylesheet" th:href="@{/css/watch.css}"/>
     <script th:src="@{/js/plyr.polyfilled.js}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const player = new Plyr('.player');
-            window.player = player;
-        });
-    </script>
 
 </head>
 <div layout:fragment="content">
@@ -20,20 +15,39 @@
         <br>
         <h1 class="my-4" th:text="${videoTitle}">WATCH</h1>
         <hr>
-            <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls>
-                <source th:src="@{${videoUrl}}" type="video/mp4" size="1080"/>
-                <source th:src="@{${videoUrl}}" type="video/mp4" size="720"/>
-                <source th:src="@{${videoUrl}}" type="video/mp4" size="360"/>
-            </video>
+        <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls>
+            <source th:src="@{${videoUrl}}" type="video/mp4" size="2160"/>
+            <source th:src="@{${videoUrl}}" type="video/mp4" size="1080"/>
+            <source th:src="@{${videoUrl}}" type="video/mp4" size="720"/>
+            <source th:src="@{${videoUrl}}" type="video/mp4" size="360"/>
+            <source th:src="@{${videoUrl}}" type="video/mkv" size="2160"/>
+            <source th:src="@{${videoUrl}}" type="video/mkv" size="1080"/>
+            <source th:src="@{${videoUrl}}" type="video/mkv" size="720"/>
+            <source th:src="@{${videoUrl}}" type="video/mkv" size="360"/>
+        </video>
         <hr>
         <h4 th:text="'아티스트: ' + ${videoAuthor}"></h4>
         <div class="text-muted mb-2" sec:authorize="isAuthenticated()"
              th:text="|등록시간: ${#temporals.format(videoDate, 'yyyy년MM월dd일 HH시mm분ss초')}|"></div>
 
-        <form th:action="@{/watch/delete/{id}(id=${videoId})}" method="post" onsubmit="return confirm('정말로 삭제할까요?');">
-            <button type="submit" class="btn btn-danger mt-3" sec:authorize="isAuthenticated()">삭제</button>
-            <a class="btn btn-secondary mt-3" href="/watch">돌아가기</a>
-        </form>
+        <div class="row">
+            <div class="col-md-2">
+                <form th:action="@{/watch/delete/{id}(id=${videoId})}" method="post"
+                      onsubmit="return confirm('정말로 삭제할까요?');">
+                    <button type="submit" class="comic-button" sec:authorize="isAuthenticated()">삭제</button>
+                </form>
+            </div>
+            <div class="col">
+                <a href="/watch">
+                    <button class="learn-more">
+  <span class="circle" aria-hidden="true">
+  <span class="icon arrow"></span>
+  </span>
+                        <span class="button-text">돌아가기</span>
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
 
     <br>
@@ -61,7 +75,9 @@
 
                 <!-- 답글 Form -->
                 <div class="reply-form" style="display: none;">
-                    <textarea class="form-control reply-content" rows="2" placeholder="답글을 입력하세요..."></textarea>
+                    <label>
+                        <textarea class="form-control reply-content" rows="2" placeholder="답글을 입력하세요..."></textarea>
+                    </label>
                     <br>
                     <button type="button" class="btn btn-light submit-reply-btn"><img th:src="@{/img/reply.png}"
                                                                                       width="15" height="15">&nbsp;답글 달기
@@ -71,7 +87,7 @@
                 <!-- 답글 -->
                 <div class="replies" th:each="reply : ${videoComment.videoReplies}">
                     <div class="reply" th:attr="data-reply-id=${reply.id}">
-                        <p><img th:src="@{/img/reply.png}" width="15" height="15">&nbsp;<strong
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img th:src="@{/img/reply.png}" width="15" height="15">&nbsp;<strong
                                 th:text="${reply.author}"></strong> <span th:text="${reply.content}"></span></p>
                         <p class="text-muted" sec:authorize="isAuthenticated()"
                            th:text="|답글시간: ${#temporals.format(reply.registerTime, 'yyyy년MM월dd일 HH시mm분')}|"></p>

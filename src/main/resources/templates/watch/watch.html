@@ -25,33 +25,28 @@
             <div class="alert alert-info" th:text="${message}"></div>
         </div>
 
+
         <section class="main-container">
             <div th:each="video : ${videos}">
                 <hr>
-                <div class="box row-gap-5">
-                    <a class="col" th:href="@{/watch/{filename}(filename=${video.fileName})}">
+                <div class="box row-gap-1">
+                    <a th:href="@{/watch/{filename}(filename=${video.fileName})}">
                         <video id="videoPlay" style="width: 100%; height: auto"
                                th:src="@{/videos/{filename}#t=5(filename=${video.fileName})}"
                                title="Video" preload="metadata" muted>
                         </video>
-
                     </a>
-                    <div class="col">
                     <p class="card-title" th:text="${video.title}"></p>
-                    </div>
-                    <div class="col">
-                    <p class="card-subtitle mb-2 text-muted" th:text="'아티스트: ' + ${video.author}"></p>
-                    </div>
-                    <div class="col">
-                    <p class="card-text text-muted mb-2" sec:authorize="isAuthenticated()"
-                       th:text="|등록시간 ${#temporals.format(video.registerTime, 'yyyy년MM월dd일 HH시mm분ss초')}|"></p>
-                    </div>
+                    <p class="card-subtitle" th:text="'아티스트: ' + ${video.author}"></p>
+
+                    <p class="card-text text-muted"
+                       th:text="|등록시간 ${#temporals.format(video.registerTime, 'yyyy년MM월dd일 HH시')}|"></p>
+                    <p class="card-text" th:text="'작성자: ' + ${video.createdBy}"></p>
 
                 </div>
             </div>
 
         </section>
-
     </div>
 </div>
 

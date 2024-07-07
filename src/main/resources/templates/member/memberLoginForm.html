@@ -16,23 +16,65 @@
         <hr>
     <form role="form" method="post" action="/members/login">
         <div class="form-floating mb-3 col-md-4">
-            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">이메일</label>
-            <div id="emailHelp" class="form-text">이메일을 입력하세요.</div>
+<!--            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" id="floatingInput" placeholder="name@example.com">-->
+<!--            <label for="floatingInput">이메일</label>-->
+<!--            <div id="emailHelp" class="form-text">이메일을 입력하세요.</div>-->
+            <div class="input__container">
+                <div class="shadow__input"></div>
+                <button class="input__button__shadow">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="#000000"
+                            width="20px"
+                            height="20px"
+                    >
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path
+                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                        ></path>
+                    </svg>
+                </button>
+                <input
+                        type="email"
+                        name="email"
+                        class="input__search"
+                        placeholder="이메일 입력..."
+                />
+            </div>
+
         </div>
         <div class="form-floating col-md-4">
-            <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Password">
-            <label for="password">패스워드</label>
-            <div id="passwordHelp" class="form-text">패스워드를 입력하세요.</div>
+<!--            <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Password">-->
+<!--            <label for="password">패스워드</label>-->
+<!--            <div id="passwordHelp" class="form-text">패스워드를 입력하세요.</div>-->
+
+            <input type="password" name="password" class="input" placeholder="패스워드 입력...">
         </div>
         <br>
         <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
         <div class="col-12 col-md-4 mb-2">
-            <button class="btn btn-light btn-lg w-100">로그인</button>
+            <button class="animated-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
+                    <path
+                            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                    ></path>
+                </svg>
+                <span class="text">로 그 인</span>
+                <span class="circle"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
+                    <path
+                            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                    ></path>
+                </svg>
+            </button>
         </div>
+
         <div class="col-12 col-md-4 mb-2">
-            <button type="button" class="btn btn-success btn-lg w-100" onclick="location.href='/members/new'">
-                회원 가입
+            <button type="button" class="btn-17" onclick="location.href='/members/new'">
+  <span class="text-container">
+    <span class="text">회원 가입</span>
+  </span>
             </button>
         </div>
 <!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->

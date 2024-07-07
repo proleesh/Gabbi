@@ -6,22 +6,42 @@
 
 <head>
     <title>Q&A 문의 게시판</title>
+    <link rel="stylesheet" th:href="@{/css/qna.css}"/>
 </head>
 <div layout:fragment="content">
         <br>
     <div class="container">
         <h1><img th:src="@{/img/qna.png}" width="50" height="50">&nbsp;Q&A 문의 게시판</h1>
         <hr/>
-        <button th:type="button" id="create-btn" class="btn btn-danger btn-sm mb-3"
-                th:onclick="|location.href='@{/new-qna}'|">문의 글 등록
+<!--        <button th:type="button" id="create-btn" class="btn btn-danger btn-sm mb-3"-->
+<!--                th:onclick="|location.href='@{/new-qna}'|">문의 글 등록-->
+<!--        </button>-->
+        <button class="btn" id="create-btn" th:type="button"
+                th:onclick="|location.href='@{/new-qna}'|">
+            <strong>문의 글 등록</strong>
+            <div id="container-stars">
+                <div id="stars"></div>
+            </div>
+
+            <div id="glow">
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
         </button>
+
+
+
         <br>
         <div class="card mb-3" th:each="item: ${qna_all}">
             <h5 class="card-header" th:text="${item.id}"></h5>
             <div class="card-body">
                 <h5 class="card-title" th:text="${item.qnaTitle}"></h5>
                 <p class="card-text" th:text="${item.qnaContent}"></p>
-                <a class="btn btn-primary" th:href="@{/qna-all/{id}(id=${item.id})}">보러가기</a>
+                <a th:href="@{/qna-all/{id}(id=${item.id})}"><button class="button" >보러가기
+                    <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                        <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
+                    </svg></button>
+                </a>
             </div>
         </div>
     </div>

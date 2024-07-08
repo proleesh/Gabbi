@@ -35,13 +35,15 @@ public class GoodsService {
     private final GoodsRepository goodsRepository;
     private final GoodsImgService goodsImgService;
     private final GoodsImgRepository goodsImgRepository;
-    private final FileService fileService;
 
     public Long saveGoods(GoodsFormDTO goodsFormDTO,
                           List<MultipartFile> goodsImgFileList) throws Exception {
         // 상품 등록
         Goods goods  = goodsFormDTO.createGoods();
+        goods.setGoodsStockNumber(goodsFormDTO.getGoodsStockNumber());
         goodsRepository.save(goods);
+
+
 
         // 이미지 등록
         for(int i = 0; i < goodsImgFileList.size(); ++i){

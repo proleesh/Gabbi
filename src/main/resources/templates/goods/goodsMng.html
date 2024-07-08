@@ -3,9 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <title>상품 관리</title>
-</head>
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         $(document).ready(() => {
@@ -29,13 +26,14 @@
         }
     </script>
 </th:block>
-<th:block layout:fragment="css">
+<head>
+    <title>상품 관리</title>
     <style>
         select {
             margin-right: 5px;
         }
     </style>
-</th:block>
+</head>
 <div layout:fragment="content">
     <div class="container">
         <br>

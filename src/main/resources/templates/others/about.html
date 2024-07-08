@@ -3,6 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>About</title>
+</head>
 <div layout:fragment="content">
     <br>
     <div class="container" sec:authorize="isAuthenticated()">

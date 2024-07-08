@@ -8,7 +8,16 @@ const modifyButton = document.getElementById('modify-btn');
 const createButton = document.getElementById('create-btn');
 
 if (createButton) {
-    createButton.addEventListener('click', () => {
+    createButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (document.getElementById("qnaTitle").value.trim() === '') {
+            alert('제목을 입력하세요.');
+            return;
+        }
+        if (document.getElementById("qnaContent").value.trim() === '') {
+            alert('내용을 입력하세요.');
+            return;
+        }
         fetch('/api/qna-all', {
             method: 'POST',
             headers: {
@@ -18,9 +27,10 @@ if (createButton) {
                 qnaTitle: document.getElementById("qnaTitle").value,
                 qnaContent: document.getElementById("qnaContent").value
             }),
+
         }).then(() => {
             location.replace("/qna-all")
-        }).catch(e => console.error(e));
+        });
     })
 }
 
@@ -45,8 +55,8 @@ if (modifyButton) {
 if (deleteButton) {
     deleteButton.addEventListener('click', () => {
         let id = document.getElementById("qna-id").value
-        if(confirm("진짜로 삭제하시겠어요? 🧐")) {
-            if(confirm("되돌릴 수 없습니다. 🧐")) {
+        if (confirm("진짜로 삭제하시겠어요? 🧐")) {
+            if (confirm("되돌릴 수 없습니다. 🧐")) {
                 fetch(`/api/qna-all/${id}`, {
                     method: 'DELETE',
                 }).then(() => {

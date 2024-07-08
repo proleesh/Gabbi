@@ -17,7 +17,7 @@ public class QnA extends BaseEntity {
     @Column(name = "qna_title", nullable = false)
     private String qnaTitle;
 
-    @Column(name = "qna_content", nullable = false)
+    @Column(name = "qna_content", nullable = false, length=655555555)
     private String qnaContent;
 
     public void update(String qnaTitle, String qnaContent) {

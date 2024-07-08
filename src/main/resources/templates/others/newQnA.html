@@ -8,7 +8,8 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-        <h1>문의 글</h1>
+        <h1 th:if="${#strings.isEmpty(qna.id)}">신규 문의 글</h1>
+        <h1 th:unless="${#strings.isEmpty(qna.id)}">글 수정</h1>
         <hr/>
         <div class="row">
             <div>

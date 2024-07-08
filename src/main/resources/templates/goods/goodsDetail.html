@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(() => {
+            calculateTotalPrice();
+
+            $("#count").change(() => {
+                calculateTotalPrice();
+            });
+
+        });
+
+        const calculateTotalPrice = () => {
+            let count = $("#count").val();
+            let price = $("#price").val();
+            let totalPrice = price * count;
+            $("#totalPrice").html(totalPrice + '원');
+        }
+    </script>
+</th:block>
+
+<head>
+    <title>상품</title>
+    <style>
+        .mgb-15 {
+            margin-bottom: 15px;
+        }
+
+        .mgt-30 {
+            margin-top: 30px;
+        }
+
+        .mgt-50 {
+            margin-top: 50px;
+        }
+
+        .repImgDiv {
+            flex: 1;
+            padding: 15px;
+        }
+
+        .repImg {
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .wd50 {
+            flex: 1;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .mgt-50 {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<div layout:fragment="content" style="margin-left:10%; margin-right: 10%">
+    <br>
+    <input type="hidden" id="goodsId" th:value="${goods.id}">
+    <div class="d-flex flex-column flex-md-row">
+        <div id="goodsImgCarousel" class="repImgDiv carousel slide carousel-fade">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#goodsImgCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#goodsImgCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img th:if="${not #strings.isEmpty(goods.goodsImgDTOList[0].imgUrl)}" th:src="${goods.goodsImgDTOList[0].imgUrl}"
+                         class="rounded repImg" th:alt="${goods.goodsName}">
+                </div>
+                <div class="carousel-item">
+                    <img th:if="${not #strings.isEmpty(goods.goodsImgDTOList[1].imgUrl)}"  th:src="${goods.goodsImgDTOList[1].imgUrl}"
+                         class="rounded repImg" th:alt="${goods.goodsName}">
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#goodsImgCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#goodsImgCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="wd50">
+            <span th:if="${goods.goodsSellStatus.toString().equals('SELL')}" class="badge bg-primary mgb-15">판매중</span>
+            <span th:if="${goods.goodsSellStatus.toString().equals('SOLD_OUT')}"
+                  class="badge bg-danger mgb-15">품절</span>
+            <div class="h4" th:text="${goods.goodsName}"></div>
+            <hr class="my-4">
+            <div class="text-right">
+                <div class="h4 text-danger text-start">
+                    <input type="hidden" th:value="${goods.goodsPrice}" id="price" name="goodsPrice">
+                    <span th:text="${goods.goodsPrice}"></span>원
+                </div>
+                <div class="input-group w-50 mgb-15">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">수량</span>
+                    </div>
+                    <input type="number" name="count" id="count" class="form-control" value="1" min="1">
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-end mgt-50">
+                <h5>결제 금액</h5>
+                <h3 name="totalPrice" id="totalPrice" class="fw-bold"></h3>
+            </div>
+            <div th:if="${goods.goodsSellStatus.toString().equals('SELL')}" class="text-end">
+                <button type="button" class="btn btn-light border border-primary btn-lg">장바구니 담기</button>
+                <button type="button" class="btn btn-primary btn-lg">주문하기</button>
+            </div>
+            <div th:unless="${goods.goodsSellStatus.toString().equals('SELL')}" class="text-end">
+                <button type="button" class="btn btn-danger btn-lg">품절</button>
+            </div>
+        </div>
+    </div>
+    <div class="mgt-30 p-5 mb-4 bg-body-tertiary rounded-3">
+        <div class="container">
+            <h4 class="display-5">상품 상세 설명</h4>
+            <hr class="my-4">
+            <p class="lead" th:text="${goods.goodsDetail}"></p>
+        </div>
+    </div>
+    <br>
+    <div th:each="goodsImg : ${goods.goodsImgDTOList}" class="text-center mgb-15">
+        <img th:if="${not #strings.isEmpty(goodsImg.imgUrl)}"
+             th:src="${goodsImg.imgUrl}" class="rounded" style="max-width: 800px; width: 100%;">
+    </div>
+</div>
+
+</html>

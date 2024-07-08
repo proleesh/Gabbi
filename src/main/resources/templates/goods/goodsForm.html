@@ -37,7 +37,8 @@
         }
     </script>
 </th:block>
-<th:block layout:fragment="css">
+<head>
+    <title>상품 상세보기</title>
     <style>
         .input-group {
             margin-bottom: 15px;
@@ -51,11 +52,12 @@
             color: #db2130;
         }
     </style>
-</th:block>
+</head>
 <div layout:fragment="content">
     <div class="container">
         <br>
-        <h1><img th:src="@{/img/new-goods.png}" width="50" height="50">&nbsp;상품 등록</h1>
+        <h1 th:if="${#strings.isEmpty(goodsFormDTO.id)}"><img th:src="@{/img/new-goods.png}" width="50" height="50">&nbsp;상품 등록</h1>
+        <h1 th:unless="${#strings.isEmpty(goodsFormDTO.id)}"><img th:src="@{/img/new-goods.png}" width="50" height="50">&nbsp;상품 수정</h1>
 
         <form role="form" method="post" enctype="multipart/form-data"
               th:object="${goodsFormDTO}">
@@ -83,10 +85,10 @@
                 data</p>
 
             <div class="input-group" sec:authorize="isAuthenticated()">
-                <span class="input-group-text">재고수</span>
-                <input type="text" th:field="*{stockNumber}" class="form-control" placeholder="상품의 재고수량을 입력해주세요">
+                <span class="input-group-text">재고</span>
+                <input type="text" th:field="*{goodsStockNumber}" class="form-control" placeholder="상품의 재고수량을 입력해주세요">
             </div>
-            <p th:if="${#fields.hasErrors('stockNumber')}" th:errors="*{stockNumber}" class="fieldError">Incorrect
+            <p th:if="${#fields.hasErrors('goodsStockNumber')}" th:errors="*{goodsStockNumber}" class="fieldError">Incorrect
                 data</p>
 
             <div class="input-group" sec:authorize="isAuthenticated()">

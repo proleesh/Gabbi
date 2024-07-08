@@ -20,6 +20,8 @@ import java.util.List;
 @Setter
 @ToString
 public class Goods extends BaseEntity {
+
+
     @Id
     @Column(name="goods_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,10 +34,10 @@ public class Goods extends BaseEntity {
     private int goodsPrice; // 상품의 가격
 
     @Column(name="goods_stock_number", nullable = false)
-    private int goodsStockNum; // 상품의 재고수량
+    private int goodsStockNumber; // 상품의 재고수량
 
     @Lob
-    @Column(name="goods_detail",nullable = false)
+    @Column(name="goods_detail",nullable = false, length=655555555)
     private String goodsDetail; // 상품의 상세 설명
 
     @Enumerated(EnumType.STRING)
@@ -54,9 +56,10 @@ public class Goods extends BaseEntity {
     public void updateGoods(GoodsFormDTO goodsFormDTO) {
         this.goodsName = goodsFormDTO.getGoodsName();
         this.goodsPrice = goodsFormDTO.getGoodsPrice();
-        this.goodsStockNum = goodsFormDTO.getStockNumber();
         this.goodsDetail = goodsFormDTO.getGoodsDetail();
+        this.goodsStockNumber = goodsFormDTO.getGoodsStockNumber();
         this.goodsSellStatus = goodsFormDTO.getGoodsSellStatus();
     }
+
 
 }

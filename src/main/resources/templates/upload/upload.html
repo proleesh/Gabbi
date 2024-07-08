@@ -4,6 +4,7 @@
       layout:decorate="~{layouts/layout}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+    <title>WATCH 업로드</title>
     <link rel="stylesheet" th:href="@{/css/upload.css}">
 </head>
 <div layout:fragment="content">
@@ -33,7 +34,7 @@
         </div>
 
         <p sec:authorize="isAuthenticated()">
-            로컬 저장소에 접근할 수 있으니 정보를 탈취할 행위가 이니므로 걱정할 필요 없습니다.
+            로컬 저장소에 접근할 수 있으니 정보를 탈취할 행위가 없으므로 걱정할 필요 없습니다.
         </p>
         <p sec:authorize="isAuthenticated()">
             포맷 형식: 아티스트 네임_제목 artist name_title

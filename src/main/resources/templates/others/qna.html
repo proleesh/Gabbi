@@ -11,7 +11,7 @@
         <br>
         <h1>등록 글 상세보기</h1>
         <hr/>
-        <div class="row">
+        <div class="row" sec:authorize="isAuthenticated()">
             <div>
                 <article>
                     <input type="hidden" id="qna-id" th:value="${qna.id}">
@@ -19,7 +19,7 @@
                         <h1 class="fw-bolder mg-1" th:text="${qna.qnaTitle}"></h1>
                         <p th:text="|작성자: ${qna.qnaAuthor}|"></p>
                         <div class="text-muted mb-2"
-                             th:text="|발표시간: ${#temporals.format(qna.qnaRegTime, 'yyyy년MM월dd일 HH시mm분ss초')}|"></div>
+                             th:text="|발표시간: ${#temporals.format(qna.qnaRegTime, 'yyyy년MM월dd일 HH시mm분')}|"></div>
                     </header>
                     <br>
                     <section>

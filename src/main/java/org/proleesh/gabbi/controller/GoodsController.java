@@ -9,6 +9,8 @@ import org.proleesh.gabbi.entity.Goods;
 import org.proleesh.gabbi.repository.GoodsImgRepository;
 import org.proleesh.gabbi.repository.GoodsRepository;
 import org.proleesh.gabbi.service.GoodsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +33,8 @@ public class GoodsController {
     private final GoodsService goodsService;
     private final GoodsRepository goodsRepository;
     private final GoodsImgRepository goodsImgRepository;
+
+    private final static Logger logger = LoggerFactory.getLogger(GoodsController.class);
 
 
 
@@ -69,6 +73,7 @@ public class GoodsController {
         try{
             GoodsFormDTO goodsFormDTO = goodsService.getGoodsDtl(goodsId);
             model.addAttribute("goodsFormDTO", goodsFormDTO);
+            logger.info(String.valueOf(goodsFormDTO.getGoodsStockNumber()));
         }catch(EntityNotFoundException e){
             model.addAttribute("errorMessage", "존재하지 않는 상품 입니다.");
             model.addAttribute("goodsFormDTO", new GoodsFormDTO());
@@ -118,5 +123,12 @@ public class GoodsController {
         goodsImgRepository.deleteByGoodsId(id);
         goodsRepository.deleteById(id);
         return "redirect:/admin/goodsAll";
+    }
+
+    @GetMapping("/goods/{goodsId}")
+    public String goodsDetail(Model model, @PathVariable("goodsId") Long goodsId){
+        GoodsFormDTO goodsFormDTO = goodsService.getGoodsDtl(goodsId);
+        model.addAttribute("goods", goodsFormDTO);
+        return "goods/goodsDetail";
     }
 }

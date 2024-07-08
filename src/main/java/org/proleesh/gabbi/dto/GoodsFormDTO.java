@@ -1,5 +1,6 @@
 package org.proleesh.gabbi.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -25,8 +26,9 @@ public class GoodsFormDTO {
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String goodsDetail;
 
+    @Column(name="goods_stock_number")
     @NotNull(message = "재고는 필수 입력 값입니다.")
-    private Integer stockNumber;
+    private Integer goodsStockNumber;
 
     private GoodsSellStatus goodsSellStatus;
 

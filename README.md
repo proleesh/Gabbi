@@ -3,4 +3,4 @@
 ## Author: `Sung-Hyuk Lee`
 ## Description: `This is gradution project aka. 'Capstone Design' of University.`
 ### Tech Skill
-#### Java(JDK 21), Spring Boot(3.3), Thymeleaf, QueryDSL, MariaDB, Spring Security 6, Spring WebSocket, JavaScript, Java Persistence API(JPA), RESTFul API
+#### Java(JDK 21), Spring Boot(3.3), Thymeleaf, QueryDSL, MySQL9.0 Innovation, Spring Security 6, Spring WebSocket, JavaScript, Java Persistence API(JPA), RESTFul API

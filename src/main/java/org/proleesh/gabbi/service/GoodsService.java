@@ -40,7 +40,6 @@ public class GoodsService {
                           List<MultipartFile> goodsImgFileList) throws Exception {
         // 상품 등록
         Goods goods  = goodsFormDTO.createGoods();
-        goods.setGoodsStockNumber(goodsFormDTO.getGoodsStockNumber());
         goodsRepository.save(goods);
 
 

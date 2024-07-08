@@ -73,7 +73,7 @@ public class GoodsController {
         try{
             GoodsFormDTO goodsFormDTO = goodsService.getGoodsDtl(goodsId);
             model.addAttribute("goodsFormDTO", goodsFormDTO);
-            logger.info(String.valueOf(goodsFormDTO.getGoodsStockNumber()));
+//            logger.info(String.valueOf(goodsFormDTO.getGoodsStockNumber()));
         }catch(EntityNotFoundException e){
             model.addAttribute("errorMessage", "존재하지 않는 상품 입니다.");
             model.addAttribute("goodsFormDTO", new GoodsFormDTO());

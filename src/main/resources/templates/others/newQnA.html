@@ -45,7 +45,15 @@
                             </button>
                         </div>
                         <div class="col">
-                            <a th:href="@{/qna-all/{id}(id=${qna.id})}">
+                            <a th:if="${qna.id} != null" th:href="@{/qna-all/{id}(id=${qna.id})}">
+                                <button class="learn-more">
+  <span class="circle" aria-hidden="true">
+  <span class="icon arrow"></span>
+  </span>
+                                    <span class="button-text">돌아가기</span>
+                                </button>
+                            </a>
+                            <a th:if="${qna.id} == null" th:href="@{/qna-all}">
                                 <button class="learn-more">
   <span class="circle" aria-hidden="true">
   <span class="icon arrow"></span>

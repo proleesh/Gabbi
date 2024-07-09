@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 /**
  * @author sung-hyuklee
  * data: 2024.6.30
+ * update: 2024.7.8
  * 비디오 Controller
  */
 @Controller

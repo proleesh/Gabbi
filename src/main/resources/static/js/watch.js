@@ -89,3 +89,4 @@ document.addEventListener('DOMContentLoaded', () => {
     const player = new Plyr('.player');
     window.player = player;
 });
+

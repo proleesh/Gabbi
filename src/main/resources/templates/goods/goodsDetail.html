@@ -3,26 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
 
-<th:block layout:fragment="script">
-    <script th:inline="javascript">
-        $(document).ready(() => {
-            calculateTotalPrice();
-
-            $("#count").change(() => {
-                calculateTotalPrice();
-            });
-
-        });
-
-        const calculateTotalPrice = () => {
-            let count = $("#count").val();
-            let price = $("#price").val();
-            let totalPrice = price * count;
-            $("#totalPrice").html(totalPrice + '원');
-        }
-    </script>
-</th:block>
 
 <head>
     <title>상품</title>
@@ -120,7 +105,7 @@
             </div>
             <div th:if="${goods.goodsSellStatus.toString().equals('SELL')}" class="text-end">
                 <button type="button" class="btn btn-light border border-primary btn-lg">장바구니 담기</button>
-                <button type="button" class="btn btn-primary btn-lg">주문하기</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="order()">주문하기</button>
             </div>
             <div th:unless="${goods.goodsSellStatus.toString().equals('SELL')}" class="text-end">
                 <button type="button" class="btn btn-danger btn-lg">품절</button>
@@ -139,6 +124,62 @@
         <img th:if="${not #strings.isEmpty(goodsImg.imgUrl)}"
              th:src="${goodsImg.imgUrl}" class="rounded" style="max-width: 800px; width: 100%;">
     </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            $(document).ready(() => {
+                calculateTotalPrice();
+
+                $("#count").change(() => {
+                    calculateTotalPrice();
+                });
+
+            });
+
+            const calculateTotalPrice = () => {
+                let count = $("#count").val();
+                let price = $("#price").val();
+                let totalPrice = price * count;
+                $("#totalPrice").html(totalPrice + '원');
+            }
+
+            const order = () => {
+                let token = $("meta[name='_csrf']").attr("content");
+                let header = $("meta[name='_csrf_header']").attr("content");
+
+                let url = "/order";
+                let paramData = {
+                    goodsId: $("#goodsId").val(),
+                    count: $("#count").val()
+                };
+
+                let param = JSON.stringify(paramData);
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: param,
+                    beforeSend: xhr => {
+                        xhr.setRequestHeader(header, token);
+                    },
+                    dataType: "json",
+                    cache: false,
+                    success: (result, status) => {
+                        alert("주문이 완료 되었습니다.");
+                        location.href='/';
+                    },
+                    error : function(jqXHR, status, error){
+                        if(jqXHR.status === '401'){
+                            alert("로그인 후 이용해주세요")
+                            location.href='/members/login';
+                        }else{
+                            alert(jqXHR.responseText)
+                        }
+                    }
+                })
+            }
+        </script>
+    </th:block>
 </div>
 
 </html>

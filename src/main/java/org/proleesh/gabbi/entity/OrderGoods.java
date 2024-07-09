@@ -27,4 +27,16 @@ public class OrderGoods extends BaseEntity {
 
     private int count; // 수량
 
+    public static OrderGoods createOrderGoods(Goods goods, int count){
+        OrderGoods orderGoods = new OrderGoods();
+        orderGoods.setGoods(goods);
+        orderGoods.setCount(count);
+        orderGoods.setOrderPrice(goods.getGoodsPrice());
+        goods.removeStock(count);
+        return orderGoods;
+    }
+    public int getTotalPrice(){
+        return orderPrice * count;
+    }
+
 }

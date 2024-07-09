@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.proleesh.gabbi.constant.GoodsSellStatus;
 import org.proleesh.gabbi.dto.GoodsFormDTO;
+import org.proleesh.gabbi.exception.OutOfStockException;
 
 import java.util.List;
 
@@ -59,6 +60,15 @@ public class Goods extends BaseEntity {
         this.goodsDetail = goodsFormDTO.getGoodsDetail();
         this.goodsStockNumber = goodsFormDTO.getGoodsStockNumber();
         this.goodsSellStatus = goodsFormDTO.getGoodsSellStatus();
+    }
+
+    public void removeStock(int goodsStockNumber){
+        int restStock = this.goodsStockNumber - goodsStockNumber;
+        if(restStock < 0){
+            throw new OutOfStockException("재고 부족. (현재 재고 수량: "
+                    + this.goodsStockNumber + ")");
+        }
+        this.goodsStockNumber = restStock;
     }
 
 

@@ -33,4 +33,28 @@ public class Order extends BaseEntity{
             orphanRemoval = true)
     private List<OrderGoods> orderGoods = new ArrayList<>();
 
+    public void addOrderGoods(OrderGoods orderGoods) {
+        this.orderGoods.add(orderGoods);
+        orderGoods.setOrder(this);
+    }
+
+    public static Order createOrder(Member member,
+                                    List<OrderGoods> orderGoodsList){
+        Order order = new Order();
+        order.setMember(member);
+        for(OrderGoods orderGoods : orderGoodsList){
+            order.addOrderGoods(orderGoods);
+        }
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for(OrderGoods orderGoods : this.orderGoods){
+            totalPrice += orderGoods.getTotalPrice();
+        }
+        return totalPrice;
+    }
 }

@@ -20,7 +20,8 @@
         </form>
         <hr>
         <div class="card">
-            <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls>
+            <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls data-plyr-config='{ "quality": {
+             "default": 1080, "options": [360, 720, 1080, 2160] } }'>
                 <source th:src="@{${videoUrl}}" type="video/mp4" size="2160"/>
                 <source th:src="@{${videoUrl}}" type="video/mp4" size="1080"/>
                 <source th:src="@{${videoUrl}}" type="video/mp4" size="720"/>

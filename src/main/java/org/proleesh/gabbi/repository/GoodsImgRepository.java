@@ -15,4 +15,6 @@ public interface GoodsImgRepository extends JpaRepository<GoodsImg, Long> {
     @Transactional
     @Query("DELETE FROM GoodsImg gi WHERE gi.goods.id = :goodsId")
     void deleteByGoodsId(@Param("goodsId") Long goodsId);
+
+    GoodsImg findByGoodsIdAndRepImgYn(Long goodsId, String repImgYn);
 }

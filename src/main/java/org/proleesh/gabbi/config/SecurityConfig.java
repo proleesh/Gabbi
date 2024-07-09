@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**",
                                 "/js/**",
                                 "/videos/**",
+                                "/watch/**",
                                 "/img/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 

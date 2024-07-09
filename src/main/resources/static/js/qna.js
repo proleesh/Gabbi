@@ -6,6 +6,8 @@ date: 2024.6.24 ~ 2024.7.5
 const deleteButton = document.getElementById('delete-btn');
 const modifyButton = document.getElementById('modify-btn');
 const createButton = document.getElementById('create-btn');
+const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+
 
 if (createButton) {
     createButton.addEventListener('click', (event) => {
@@ -22,6 +24,7 @@ if (createButton) {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken
             },
             body: JSON.stringify({
                 qnaTitle: document.getElementById("qnaTitle").value,
@@ -41,7 +44,8 @@ if (modifyButton) {
         fetch(`/api/qna-all/${id}`, {
             method: 'PUT',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken
             },
             body: JSON.stringify({
                 qnaTitle: document.getElementById("qnaTitle").value,
@@ -59,6 +63,10 @@ if (deleteButton) {
             if (confirm("되돌릴 수 없습니다. 🧐")) {
                 fetch(`/api/qna-all/${id}`, {
                     method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": csrfToken
+                    },
                 }).then(() => {
 
                     location.replace(`/qna-all`)
@@ -85,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken
                 },
                 body: JSON.stringify({content: content, qnaId: qnaId})
             }).then(response => {
@@ -135,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken
                 },
                 body: JSON.stringify({content: replyContent, commentId: commentId})
             }).then(response => {

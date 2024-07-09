@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <style>
+        .content-mg {
+            margin: 2% auto;
+            max-width: 90%;
+        }
+
+        .repImgDiv {
+            margin-right: 15px;
+            margin-left: 15px;
+            height: auto;
+        }
+
+        .repImg2 {
+            height: 100px;
+            width: 100px;
+        }
+
+        .card {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .fs18 {
+            font-size: 18px
+        }
+
+        .fs24 {
+            font-size: 24px
+        }
+
+        @media (max-width: 768px) {
+            .repImg2 {
+                height: 75px;
+                width: 75px;
+            }
+
+            .fs18 {
+                font-size: 16px;
+            }
+
+            .fs24 {
+                font-size: 20px;
+            }
+        }
+    </style>
+    <script>
+        const cancelOrder = orderId => {
+            let token = document.querySelector("meta[name='_csrf']").getAttribute("content");
+            let header = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
+
+            let url = "/order/" + orderId + "/cancel";
+            let paramData = { orderId: orderId };
+            let param = JSON.stringify(paramData);
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    [header]: token
+                },
+                body: param
+            }).then(response => {
+                if (response.ok) {
+                    alert("주문이 취소 되었습니다.");
+                    location.href = '/orders/' + [[${page}]];
+                } else if (response.status === 401) {
+                    alert('로그인 후 이용해주세요');
+                    location.href = '/members/login';
+                } else {
+                    response.text().then(text => alert(text));
+                }
+            }).catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+<div layout:fragment="content" class="content-mg">
+    <br>
+    <h1 class="my-4 fs24">구매 이력</h1>
+    <div th:each="order : ${orders}">
+        <div class="d-flex mb-3 align-self-center">
+            <h4 th:text="${order.orderDate} + ' 주문'" class="fs18"></h4>
+            <div class="m-lg-3">
+                <th:block th:if="${order.orderStatus.toString().equals('ORDER')}">
+                    <button type="button" class="btn btn-outline-secondary" th:value="${order.orderId}" onclick="cancelOrder(this.value)">주문취소</button>
+                </th:block>
+                <th:block th:unless="${order.orderStatus.toString().equals('ORDER')}">
+                    <h4 class="fs18">(취소 완료)</h4>
+                </th:block>
+            </div>
+        </div>
+        <div class="card d-flex flex-column">
+            <div th:each="orderGoods : ${order.orderGoodsDTOList}" class="d-flex mb-3 align-items-center">
+                <div class="repImgDiv">
+                    <img th:src="${orderGoods.imgUrl}" class="rounded repImg2" th:alt="${orderGoods.goodsName}">
+                </div>
+                <div class="align-self-center w-75">
+                    <span th:text="${orderGoods.orderPrice} + '원'" class="fs18"></span>
+                    <span th:text="${orderGoods.count} + '개'" class="fs18"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:with="start=${(orders.number/maxPage)*maxPage + 1},
+             end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage - 1) < orders.totalPages ? start + (maxPage - 1) : orders.totalPages)})">
+        <ul class="pagination pagination-sm justify-content-center">
+            <li class="page-item" th:classappend="${orders.number == 0} ? 'disabled':''">
+                <a th:href="@{'/orders/' + ${orders.number - 1}}" aria-label="Previous" class="page-link">
+                    <span aria-hidden="true">Previous</span>
+                </a>
+            </li>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${orders.number == page - 1}? 'active':''">
+                <a th:href="@{'/orders/' + ${page - 1}}" th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+            <li class="page-item" th:classappend="${orders.number + 1 >= orders.totalPages}?'disabled':''">
+                <a th:href="@{'/orders/' + ${orders.number + 1}}" aria-label="Next" class="page-link">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

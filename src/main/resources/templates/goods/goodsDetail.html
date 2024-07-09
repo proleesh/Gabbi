@@ -4,83 +4,22 @@
       layout:decorate="~{layouts/layout}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+    <title th:text="${goods.goodsName}"></title>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 
 
-<head>
-    <title>상품</title>
-    <style>
-        .mgb-15 {
-            margin-bottom: 15px;
-        }
-
-        .mgt-30 {
-            margin-top: 30px;
-        }
-
-        .mgt-50 {
-            margin-top: 50px;
-        }
-
-        .repImgDiv {
-            flex: 1;
-            padding: 15px;
-        }
-
-        .repImg {
-            max-width: 100%;
-            object-fit: contain;
-        }
-
-        .wd50 {
-            flex: 1;
-            padding: 15px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            .mgt-50 {
-                margin-top: 10px;
-            }
-        }
-    </style>
-</head>
-
-<div layout:fragment="content" style="margin-left:10%; margin-right: 10%">
+<div layout:fragment="content" style="margin-left:5%; margin-right: 5%">
+    <br>
     <br>
     <input type="hidden" id="goodsId" th:value="${goods.id}">
-    <div class="d-flex flex-column flex-md-row">
-        <div id="goodsImgCarousel" class="repImgDiv carousel slide carousel-fade">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#goodsImgCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#goodsImgCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img th:if="${not #strings.isEmpty(goods.goodsImgDTOList[0].imgUrl)}" th:src="${goods.goodsImgDTOList[0].imgUrl}"
-                         class="rounded repImg" th:alt="${goods.goodsName}">
-                </div>
-                <div class="carousel-item">
-                    <img th:if="${not #strings.isEmpty(goods.goodsImgDTOList[1].imgUrl)}"  th:src="${goods.goodsImgDTOList[1].imgUrl}"
-                         class="rounded repImg" th:alt="${goods.goodsName}">
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#goodsImgCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#goodsImgCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+    <div class="d-flex flex-column flex-md-row mb-3 row">
+        <div class="col-md-6">
+            <img style="max-width: 100%; max-height: 100%" th:src="${goods.goodsImgDTOList[0].imgUrl}"
+                 class="rounded" th:alt="${goods.goodsName}">
         </div>
-        <div class="wd50">
+        <div class="col-md-6">
             <span th:if="${goods.goodsSellStatus.toString().equals('SELL')}" class="badge bg-primary mgb-15">판매중</span>
             <span th:if="${goods.goodsSellStatus.toString().equals('SOLD_OUT')}"
                   class="badge bg-danger mgb-15">품절</span>
@@ -166,13 +105,13 @@
                     cache: false,
                     success: (result, status) => {
                         alert("주문이 완료 되었습니다.");
-                        location.href='/';
+                        location.href = '/';
                     },
-                    error : function(jqXHR, status, error){
-                        if(jqXHR.status === '401'){
+                    error: function (jqXHR, status, error) {
+                        if (jqXHR.status === '401') {
                             alert("로그인 후 이용해주세요")
-                            location.href='/members/login';
-                        }else{
+                            location.href = '/members/login';
+                        } else {
                             alert(jqXHR.responseText)
                         }
                     }

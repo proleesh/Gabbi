@@ -1,3 +1,5 @@
+const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+
 document.addEventListener('DOMContentLoaded', function () {
     const submitCommentButton = document.getElementById('submit-comment-btn');
     if (submitCommentButton) {
@@ -16,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken
                 },
                 body: JSON.stringify({content: content, videoName: videoName})
             }).then(response => {
@@ -67,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken
                 },
                 body: JSON.stringify({content: replyContent, commentId: commentId})
             }).then(response => {

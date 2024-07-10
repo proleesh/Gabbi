@@ -32,7 +32,7 @@
                         <div class="col-md-2">
                             <button type="button" id="modify-btn"
                                     th:onclick="|location.href='@{/new-qna?id={qnaId}(qnaId=${qna.id})}'|"
-                                    sec:authorize="isAuthenticated()"
+                                    sec:authorize="hasRole('ROLE_USER')"
                                     class="button">
                                 수정
                                 <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-2">
                             <button type="button" id="delete-btn" class="comic-button"
-                                    sec:authorize="isAuthenticated()">
+                                    sec:authorize="hasRole('ROLE_ADMIN')">
                                 삭제
                             </button>
                         </div>

@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
 <head>
-    <title>회원가입</title>
+    <title>관리자 회원가입</title>
     <style>
         .fieldError {
             color: #db2130;
@@ -25,10 +25,10 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-        <h1>회원 가입</h1>
+        <h1>관리자 회원가입</h1>
         <hr>
-        <form class="form" action="/members/new" role="form" method="post" th:object="${memberFormDTO}">
-            <div class="title">Welcome,<br><span>GABBI new member^^</span></div>
+        <form class="form" action="/members/new/admin" role="form" method="post" th:object="${memberFormDTO}">
+            <div class="title">Welcome,<br><span>GABBI admin new member^^</span></div>
             <div class="mb-3 col-md-4">
                 <label th:for="name" class="form-label">이름</label>
                 <input type="text" class="input" th:field="*{name}" aria-describedby="nameHelp"
@@ -64,4 +64,5 @@
     </div>
 </div>
 </body>
+
 </html>

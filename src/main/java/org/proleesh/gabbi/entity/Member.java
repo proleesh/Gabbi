@@ -32,13 +32,15 @@ public class Member extends BaseEntity {
     private Role role;
 
     public static Member createMember(MemberFormDTO memberFormDTO,
-                                      PasswordEncoder passwordEncoder) {
+                                      PasswordEncoder passwordEncoder,
+                                      Role role) {
         Member member = new Member();
         member.setName(memberFormDTO.getName());
         member.setEmail(memberFormDTO.getEmail());
         member.setPassword(passwordEncoder.encode(memberFormDTO.getPassword()));
         member.setAddress(memberFormDTO.getAddress());
-        member.setRole(Role.USER);
+//        member.setRole(Role.USER);
+        member.setRole(role);
         return member;
 
     }

@@ -8,9 +8,11 @@
             <a href="/"><img th:src="@{/img/gabbi.png}" alt="Logo" width="40" height="40"
                              class="d-inline-block align-text-top"></a>
             &nbsp;
-            <a class="navbar-brand" href="/"><img th:src="@{/img/font/gabbi-font.png}" alt="Logo" width="100"
+            <a sec:authorize="hasRole('ROLE_USER')" class="navbar-brand" href="/"><img th:src="@{/img/font/gabbi-font.png}" alt="Logo" width="100"
                                                   height="35" class="d-inline-block align-text-top">&nbsp;with your
                 life</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-brand" href="/"><img th:src="@{/img/font/gabbi-font.png}" alt="Logo" width="100"
+                                                                                       height="35" class="d-inline-block align-text-top">&nbsp;ADMIN</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -32,15 +34,13 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                            aria-expanded="true">
                             <img th:src="@{/img/manager.png}" width="25" height="25">&nbsp;관리자용
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/watch/upload"><img th:src="@{/img/video-upload.png}"
-                                                                                   width="25" height="25">&nbsp;Watch
-                                업로드</a></li>
+
                             <li><a class="dropdown-item" href="/admin/goods/new"><img th:src="@{/img/new-goods.png}"
                                                                                       width="25" height="25">&nbsp;상품 등록</a>
                             </li>
@@ -67,10 +67,15 @@
                 &nbsp;
                 <ul class="navbar-nav mb-5 mb-lg-0">
                     <li class="nav-item">
+                        <a class="nav-link" href="/watch/upload"><img th:src="@{/img/video-upload.png}"
+                                                                      width="25" height="25">&nbsp;Watch
+                            업로드</a></li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/watch"><img th:src="@{/img/video.png}" width="25" height="25">&nbsp;WATCH</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/qna-all" sec:authorize="isAuthenticated()"><img th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A
+                        <a class="nav-link" href="/qna-all" sec:authorize="isAuthenticated()"><img
+                                th:src="@{/img/qna.png}" width="25" height="25">&nbsp;Q&A
                             질문하기</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">

@@ -60,7 +60,7 @@
         <h1 th:unless="${#strings.isEmpty(goodsFormDTO.id)}"><img th:src="@{/img/new-goods.png}" width="50" height="50">&nbsp;상품 수정</h1>
 
         <form role="form" method="post" enctype="multipart/form-data"
-              th:object="${goodsFormDTO}">
+              th:object="${goodsFormDTO}" sec:authorize="hasRole('ROLE_ADMIN')">
 
             <hr>
             <input type="hidden" th:field="*{id}">

@@ -53,7 +53,7 @@
 
                         <p class="card-text text-muted"
                            th:text="|등록시간 ${#temporals.format(video.registerTime, 'yyyy년MM월dd일 HH시')}|"></p>
-                        <p class="card-text" th:text="'등록자: ' + ${video.createdBy}">[[${video.createdBy}]]</p>
+                        <p class="card-text" sec:authorize="hasRole('ROLE_ADMIN')" th:text="'등록자: ' + ${video.createdBy}">[[${video.createdBy}]]</p>
                     </div>
 
                     <a th:href="@{/watch/{filename}(filename=${video.fileName})}">

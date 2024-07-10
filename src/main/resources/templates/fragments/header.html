@@ -67,7 +67,7 @@
                 &nbsp;
                 <ul class="navbar-nav mb-5 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/watch/upload"><img th:src="@{/img/video-upload.png}"
+                        <a class="nav-link" href="/watch/upload" sec:authorize="isAuthenticated()"><img th:src="@{/img/video-upload.png}"
                                                                       width="25" height="25">&nbsp;Watch
                             업로드</a></li>
                     <li class="nav-item">

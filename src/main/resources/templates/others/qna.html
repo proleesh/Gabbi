@@ -18,6 +18,16 @@
             <div>
                 <article>
                     <input type="hidden" id="qna-id" th:value="${qna.id}">
+                    <div class="col">
+                        <a href="/qna-all">
+                            <button class="learn-more">
+  <span class="circle" aria-hidden="true">
+  <span class="icon arrow"></span>
+  </span>
+                                <span class="button-text">돌아가기</span>
+                            </button>
+                        </a>
+                    </div>
                     <header>
                         <h1 class="fw-bolder mg-1" th:text="${qna.qnaTitle}"></h1>
                         <p th:text="|작성자: ${qna.qnaAuthor}|"></p>
@@ -32,7 +42,8 @@
                         <div class="col-md-2">
                             <button type="button" id="modify-btn"
                                     th:onclick="|location.href='@{/new-qna?id={qnaId}(qnaId=${qna.id})}'|"
-                                    sec:authorize="hasRole('ROLE_USER')"
+                                    th:if="${canEdit}"
+                                    sec:authorize="${hasAuthority('ROLE_USER') or (qna.getCreatedBy() == principal.username)}"
                                     class="button">
                                 수정
                                 <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
@@ -48,16 +59,7 @@
                                 삭제
                             </button>
                         </div>
-                        <div class="col">
-                            <a href="/qna-all">
-                                <button class="learn-more">
-  <span class="circle" aria-hidden="true">
-  <span class="icon arrow"></span>
-  </span>
-                                    <span class="button-text">돌아가기</span>
-                                </button>
-                            </a>
-                        </div>
+
                     </div>
 
                 </article>

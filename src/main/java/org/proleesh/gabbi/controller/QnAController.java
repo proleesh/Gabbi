@@ -7,6 +7,9 @@ import org.proleesh.gabbi.entity.Comment;
 import org.proleesh.gabbi.entity.QnA;
 import org.proleesh.gabbi.service.CommentService;
 import org.proleesh.gabbi.service.QnAService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +42,8 @@ public class QnAController {
         List<Comment> comments = commentService.getCommentsByQnaId(id);
         model.addAttribute("qna", new QnAViewDTO(qna));
         model.addAttribute("comments", comments);
+        boolean canEdit = qna.getCreatedBy().equals(getCurrentUsername());
+        model.addAttribute("canEdit", canEdit);
         return "others/qna";
     }
 
@@ -52,6 +57,14 @@ public class QnAController {
         }
 
         return "others/newQnA";
+    }
+    private String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return userDetails.getUsername();
+        }
+        return null;
     }
 
 

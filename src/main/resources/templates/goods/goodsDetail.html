@@ -16,8 +16,8 @@
     <input type="hidden" id="goodsId" th:value="${goods.id}">
     <div class="d-flex flex-column flex-md-row mb-3 row">
         <div class="col-md-6">
-            <img style="max-width: 100%; max-height: 100%" th:src="${goods.goodsImgDTOList[0].imgUrl}"
-                 class="rounded" th:alt="${goods.goodsName}">
+                    <img style="max-width: 100%; max-height: 100%" th:src="${goods.goodsImgDTOList[0].imgUrl}"
+                         class="rounded" th:alt="${goods.goodsName}">
         </div>
         <div class="col-md-6">
             <span th:if="${goods.goodsSellStatus.toString().equals('SELL')}" class="badge bg-primary mgb-15">판매중</span>

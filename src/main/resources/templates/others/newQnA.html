@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
 <head>
+    <title th:if="${#strings.isEmpty(qna.id)}">하고 싶은 말</title>
     <link rel="stylesheet" th:href="@{/css/qna-del.css}"/>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
@@ -10,7 +11,7 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-        <h1 th:if="${#strings.isEmpty(qna.id)}">신규 문의 글</h1>
+        <h1 th:if="${#strings.isEmpty(qna.id)}">하고 싶은 말</h1>
         <h1 th:unless="${#strings.isEmpty(qna.id)}">글 수정</h1>
         <hr/>
         <div class="row">

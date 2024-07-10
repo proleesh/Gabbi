@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class QnAController {
     public String getQnAAll(Model model) {
         List<QnAListViewDTO> qna_all = qnAService.findAll()
                 .stream()
+                .sorted(Comparator.comparing(QnA::getRegisterTime).reversed())
                 .map(QnAListViewDTO::new)
                 .toList();
         model.addAttribute("qna_all", qna_all);

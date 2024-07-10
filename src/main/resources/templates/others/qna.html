@@ -43,8 +43,9 @@
                             <button type="button" id="modify-btn"
                                     th:onclick="|location.href='@{/new-qna?id={qnaId}(qnaId=${qna.id})}'|"
                                     th:if="${canEdit}"
-                                    sec:authorize="${hasAuthority('ROLE_USER') or (qna.getCreatedBy() == principal.username)}"
+
                                     class="button">
+<!--                                sec:authorize="${hasAuthority('ROLE_USER') or (qna.qnaAuthor == principal.username)}"-->
                                 수정
                                 <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
                                     <path clip-rule="evenodd"
@@ -55,7 +56,7 @@
                         </div>
                         <div class="col-md-2">
                             <button type="button" id="delete-btn" class="comic-button"
-                                    sec:authorize="hasRole('ROLE_ADMIN')">
+                                    sec:authorize="${hasAuthority('ROLE_ADMIN')}">
                                 삭제
                             </button>
                         </div>
@@ -113,7 +114,6 @@
                             <p class="text-muted"
                                th:text="|답글시간: ${#temporals.format(comment.registerTime, 'yyyy년MM월dd일 HH시mm분')}|"></p>
                         </div>
-                        </brdiv>
                     </div>
                     <hr/>
                 </div>

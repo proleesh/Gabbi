@@ -38,12 +38,17 @@ public class QnAController {
 
     @GetMapping("/qna-all/{id}")
     public String getQnA(@PathVariable Long id, Model model) {
+        // id를 통해 QnA객체 검색
         QnA qna = qnAService.findById(id);
+        // QnA관한 댓글 얻기
         List<Comment> comments = commentService.getCommentsByQnaId(id);
+        // QnA객체 & 댓글을 model 에 추가하기
         model.addAttribute("qna", new QnAViewDTO(qna));
         model.addAttribute("comments", comments);
+        // 사용자가 수정 또는 삭제 권한 있는지 확인
         boolean canEdit = qna.getCreatedBy().equals(getCurrentUsername());
         model.addAttribute("canEdit", canEdit);
+
         return "others/qna";
     }
 

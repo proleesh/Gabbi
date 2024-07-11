@@ -40,6 +40,7 @@
                     <div class="card-body">
                         <p class="card-title" th:text="${video.title}"></p>
                         <p class="card-des" th:text="'아티스트: ' + ${video.author}">[[${video.author}]]</p>
+                        <p class="card-des" th:text="'시청수: ' + ${video.views}">[[${video.views}]]</p>
 
                         <p class="card-text text-muted"
                            th:text="|등록시간 ${#temporals.format(video.registerTime, 'yyyy년MM월dd일 HH시')}|"></p>

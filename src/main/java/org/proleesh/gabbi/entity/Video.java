@@ -19,9 +19,9 @@ public class Video extends BaseEntity{
     private String fileName;
     private String title;
     private String author;
-    private int views;
+    private Long views;
 
-    public Video(String fileName, String title, String author, int views){
+    public Video(String fileName, String title, String author, Long views){
         this.fileName = fileName;
         this.title = title;
         this.author = author;

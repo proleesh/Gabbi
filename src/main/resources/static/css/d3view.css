@@ -1,0 +1,17 @@
+.x-axis text {
+    font-size: 10px;
+}
+
+@media (max-width: 600px) {
+    .x-axis text {
+        font-size: 8px;
+    }
+
+}
+
+.bar {
+    fill: #fbff00;
+}
+.bar:hover {
+    fill: orange;
+}

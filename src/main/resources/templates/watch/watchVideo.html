@@ -10,6 +10,7 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <script th:src="@{/js/plyr.polyfilled.js}"></script>
+    <script th:src="@{/js/hls.min.js}"></script>
 
 </head>
 <div layout:fragment="content">
@@ -23,19 +24,12 @@
         </form>
         <hr>
 
-            <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls>
-                <source th:src="@{${videoUrl}}" type="video/mp4" size="2160"/>
-                <source th:src="@{${videoUrl}}" type="video/mp4" size="1080"/>
-                <source th:src="@{${videoUrl}}" type="video/mp4" size="720"/>
-                <source th:src="@{${videoUrl}}" type="video/mp4" size="360"/>
-                <source th:src="@{${videoUrl}}" type="video/mkv" size="2160"/>
-                <source th:src="@{${videoUrl}}" type="video/mkv" size="1080"/>
-                <source th:src="@{${videoUrl}}" type="video/mkv" size="720"/>
-                <source th:src="@{${videoUrl}}" type="video/mkv" size="360"/>
-            </video>
+        <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls>
+            <source th:src="@{${videoUrl}}" type="video/mp4"/>
+        </video>
         <hr>
         <h4 th:text="'아티스트: ' + ${videoAuthor}"></h4>
-        <h4  th:text="'시청수: ' + ${videoViews}">0</h4>
+        <h6 class="text-muted" th:text="'시청수: ' + ${videoViews}">0</h6>
         <div class="text-muted mb-2" sec:authorize="isAuthenticated()"
              th:text="|등록시간: ${#temporals.format(videoDate, 'yyyy년MM월dd일 HH시mm분ss초')}|"></div>
 
@@ -103,6 +97,76 @@
     </div>
 
 
+<!--    <script th:inline="javascript">-->
+
+<!--        document.addEventListener('DOMContentLoaded', () => {-->
+<!--            let source = /*[[ ${videoUrl} ]]*/ '';-->
+<!--            const video = document.querySelector('video');-->
+
+<!--            const defaultOptions = {};-->
+
+<!--            if (!Hls.isSupported()) {-->
+<!--                video.src = source;-->
+<!--                var player = new Plyr(video, defaultOptions);-->
+<!--            } else {-->
+<!--                // For more Hls.js options, see https://github.com/dailymotion/hls.js-->
+<!--                const hls = new Hls();-->
+<!--                hls.loadSource(source);-->
+
+<!--                // From the m3u8 playlist, hls parses the manifest and returns-->
+<!--                // all available video qualities. This is important, in this approach,-->
+<!--                // we will have one source on the Plyr player.-->
+<!--                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {-->
+
+<!--                    // Transform available levels into an array of integers (height values).-->
+<!--                    const availableQualities = hls.levels.map((l) => l.height)-->
+<!--                    availableQualities.unshift(0) //prepend 0 to quality array-->
+
+<!--                    // Add new qualities to option-->
+<!--                    defaultOptions.quality = {-->
+<!--                        default: 0, //Default - AUTO-->
+<!--                        options: availableQualities,-->
+<!--                        forced: true,-->
+<!--                        onChange: (e) => updateQuality(e),-->
+<!--                    }-->
+<!--                    // Add Auto Label-->
+<!--                    defaultOptions.i18n = {-->
+<!--                        qualityLabel: {-->
+<!--                            0: 'Auto',-->
+<!--                        },-->
+<!--                    }-->
+
+<!--                    hls.on(Hls.Events.LEVEL_SWITCHED, function (event, data) {-->
+<!--                        var span = document.querySelector(".plyr__menu__container [data-plyr='quality'][value='0'] span")-->
+<!--                        if (hls.autoLevelEnabled) {-->
+<!--                            span.innerHTML = `AUTO (${hls.levels[data.level].height}p)`-->
+<!--                        } else {-->
+<!--                            span.innerHTML = `AUTO`-->
+<!--                        }-->
+<!--                    })-->
+
+<!--                    // Initialize new Plyr player with quality options-->
+<!--                    var player = new Plyr(video, defaultOptions);-->
+<!--                });-->
+
+<!--                hls.attachMedia(video);-->
+<!--                window.hls = hls;-->
+<!--            }-->
+
+<!--            function updateQuality(newQuality) {-->
+<!--                if (newQuality === 0) {-->
+<!--                    window.hls.currentLevel = -1; //Enable AUTO quality if option.value = 0-->
+<!--                } else {-->
+<!--                    window.hls.levels.forEach((level, levelIndex) => {-->
+<!--                        if (level.height === newQuality) {-->
+<!--                            console.log("Found quality match with " + newQuality);-->
+<!--                            window.hls.currentLevel = levelIndex;-->
+<!--                        }-->
+<!--                    });-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--    </script>-->
     <script th:src="@{/js/watch.js}"></script>
 </div>
 

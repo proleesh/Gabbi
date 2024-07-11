@@ -61,6 +61,7 @@ public class VideoController {
                         .header(HttpHeaders.CONTENT_TYPE, "video/flv")
                         .header(HttpHeaders.CONTENT_TYPE, "video/avi")
                         .header(HttpHeaders.CONTENT_TYPE, "video/wmv")
+                        .header(HttpHeaders.CONTENT_TYPE, "video/m3u8")
                         .body(resource);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -161,7 +162,7 @@ public class VideoController {
             // 동영상을 DB에 저장하기
             Video video = new Video(file.getOriginalFilename(),
                     title,
-                    author, 0);
+                    author, 0L);
             videoRepository.save(video);
 
             String message = "당신은 성공적으로 동영상 " + file.getOriginalFilename() + "를 업로드 했습니다.";

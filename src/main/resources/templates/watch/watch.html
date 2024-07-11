@@ -26,7 +26,7 @@
         </div>
         <br>
         <br>
-        <form method="get" action="/watch/search">
+        <form method="get" action="/watch/search" sec:authorize="isAuthenticated()">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" name="query" placeholder="Search for WATCH" aria-label="Search for videos">
                 <div class="input-group-append">
@@ -35,7 +35,7 @@
             </div>
         </form>
 
-        <div class="row">
+        <div class="row" sec:authorize="isAuthenticated()">
             <div class="col-md-4 mb-4" th:each="video : ${videos}">
                 <div class="md-4 cardStyle">
                     <a th:href="@{/watch/{filename}(filename=${video.fileName})}">

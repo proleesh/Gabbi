@@ -24,4 +24,19 @@ public class CartItem extends BaseTimeEntity{
 
     private int count;
 
+    public static CartItem createCartItem(Cart cart, Goods goods, int count) {
+        CartItem cartItem = new CartItem();
+        cartItem.setCart(cart);
+        cartItem.setGoods(goods);
+        cartItem.setCount(count);
+        return cartItem;
+    }
+    public void addCount(int count) {
+        this.count += count;
+    }
+
+    public void updateCount(int count) {
+        this.count = count;
+    }
+
 }

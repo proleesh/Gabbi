@@ -16,8 +16,8 @@
     <input type="hidden" id="goodsId" th:value="${goods.id}">
     <div class="d-flex flex-column flex-md-row mb-3 row">
         <div class="col-md-6">
-                    <img style="max-width: 100%; max-height: 100%" th:src="${goods.goodsImgDTOList[0].imgUrl}"
-                         class="rounded" th:alt="${goods.goodsName}">
+            <img style="max-width: 100%; max-height: 100%" th:src="${goods.goodsImgDTOList[0].imgUrl}"
+                 class="rounded" th:alt="${goods.goodsName}">
         </div>
         <div class="col-md-6">
             <span th:if="${goods.goodsSellStatus.toString().equals('SELL')}" class="badge bg-primary mgb-15">판매중</span>
@@ -43,7 +43,7 @@
                 <h3 name="totalPrice" id="totalPrice" class="fw-bold"></h3>
             </div>
             <div th:if="${goods.goodsSellStatus.toString().equals('SELL')}" class="text-end">
-                <button type="button" class="btn btn-light border border-primary btn-lg">장바구니 담기</button>
+                <button type="button" class="btn btn-light border border-primary btn-lg" onclick="addCart()">장바구니 담기</button>
                 <button type="button" class="btn btn-primary btn-lg" onclick="order()">주문하기</button>
             </div>
             <div th:unless="${goods.goodsSellStatus.toString().equals('SELL')}" class="text-end">
@@ -113,6 +113,44 @@
                             location.href = '/members/login';
                         } else {
                             alert(jqXHR.responseText)
+                        }
+                    }
+                })
+            }
+
+            const addCart = () => {
+                let token = $("meta[name='_csrf']").attr("content");
+                let header = $("meta[name='_csrf_header']").attr("content");
+
+                let url = "/cart";
+                let paramData = {
+                    goodsId: $("#goodsId").val(),
+                    count: $("#count").val()
+                };
+                let param = JSON.stringify(paramData);
+
+                $.ajax({
+                    url : url,
+                    type : "POST",
+                    contentType : "application/json",
+                    data : param,
+                    beforeSend : function(xhr){
+                    /* 데이터를 전송하기 전에 헤더에 csrf 값을 설정 */
+                    xhr.setRequestHeader(header, token);
+                    },
+                    dataType : "json",
+                    cache : false,
+                    success : function(result, status){
+                    alert("상품을 장바구니에 담았습니다.");
+                    location.href='/';
+                    },
+                    error : function(jqXHR, status, error) {
+
+                        if (jqXHR.status === '401') {
+                            alert('로그인 후 이용해주세요');
+                            location.href = '/members/login';
+                        } else {
+                            alert(jqXHR.responseText);
                         }
                     }
                 })

@@ -121,6 +121,7 @@
 
             <div th:if="${#strings.isEmpty(goodsFormDTO.id)}" style="text-align: center"
                  sec:authorize="isAuthenticated()">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-4 mb-2">
                         <button th:action="@{/admin/goods/new}" type="submit"
@@ -152,7 +153,7 @@
                 </div>
 
 
-                <!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
             </div>
         </form>

@@ -104,8 +104,9 @@ public class GoodsService {
     }
 
     @Transactional(readOnly = true)
-    public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
+    public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable) {
         return goodsRepository.getMainGoodsPage(goodsSearchDTO, pageable);
     }
+
 
 }

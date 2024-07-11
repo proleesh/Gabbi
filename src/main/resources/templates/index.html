@@ -8,7 +8,20 @@
 </head>
 <div layout:fragment="content">
     <br>
+    <form th:action="@{/}" method="get">
+        <!--                    <input name="searchQuery" class="form-control me-2" type="search" placeholder="검색하기"-->
+        <!--                           aria-label="Search">-->
+        <div class="input-container">
+            <input
+                    class="input"
+                    name="searchQuery"
+                    type="search"
+                    placeholder="검색하기..."
+            />
+        </div>
 
+    </form>
+    <br>
     <input type="hidden" name="searchQuery" th:value="${goodsSearchDTO.searchQuery}">
     <div th:if="${not #strings.isEmpty(goodsSearchDTO.searchQuery)}" class="center">
         <p class="h3 fw-bold" th:text="${goodsSearchDTO.searchQuery} + '검색 결과'">

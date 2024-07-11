@@ -4,6 +4,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.proleesh.gabbi.dto.CartDetailDTO;
 import org.proleesh.gabbi.dto.CartGoodsDTO;
+import org.proleesh.gabbi.dto.CartOrderDTO;
+import org.proleesh.gabbi.dto.OrderDTO;
 import org.proleesh.gabbi.entity.Cart;
 import org.proleesh.gabbi.entity.CartItem;
 import org.proleesh.gabbi.entity.Goods;
@@ -27,6 +29,7 @@ public class CartService {
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final OrderService orderService;
     public Long addCart(CartGoodsDTO cartGoodsDTO, String email) {
         Goods goods = goodsRepository.findById(cartGoodsDTO.getGoodsId())
                 .orElseThrow(EntityNotFoundException::new);
@@ -88,5 +91,28 @@ public class CartService {
                 .orElseThrow(EntityNotFoundException::new);
 
         cartItemRepository.delete(cartItem);
+    }
+
+    public Long orderCartItem(List<CartOrderDTO> cartOrderDTOList, String email){
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        for(CartOrderDTO cartOrderDTO : cartOrderDTOList){
+            CartItem cartItem = cartItemRepository
+                    .findById(cartOrderDTO.getCartItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setGoodsId(cartItem.getGoods().getId());
+            orderDTO.setCount(cartItem.getCount());
+            orderDTOList.add(orderDTO);
+        }
+        Long orderId = orderService.orders(orderDTOList, email);
+
+        for(CartOrderDTO cartOrderDTO : cartOrderDTOList){
+            CartItem cartItem = cartItemRepository
+                    .findById(cartOrderDTO.getCartItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+            cartItemRepository.delete(cartItem);
+        }
+        return orderId;
     }
 }

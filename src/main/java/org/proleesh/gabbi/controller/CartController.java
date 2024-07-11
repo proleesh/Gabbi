@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.proleesh.gabbi.dto.CartDetailDTO;
 import org.proleesh.gabbi.dto.CartGoodsDTO;
+import org.proleesh.gabbi.dto.CartOrderDTO;
 import org.proleesh.gabbi.service.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -83,5 +84,26 @@ public class CartController {
         }
         cartService.deleteCartItem(cartItemId);
         return new ResponseEntity<>(cartItemId,HttpStatus.OK);
+    }
+
+    @PostMapping("/cart/orders")
+    public @ResponseBody ResponseEntity orderCartItem(@RequestBody CartOrderDTO cartOrderDTO, Principal principal) {
+        if (principal == null) {
+            return new ResponseEntity<>("User is not authenticated", HttpStatus.UNAUTHORIZED);
+        }
+        List<CartOrderDTO> cartOrderDTOList = cartOrderDTO.getCartOrderDTOList();
+        if(cartOrderDTOList == null || cartOrderDTOList.size() == 0){
+            return new ResponseEntity<>("주문할 상품을 선택해주세요",
+                    HttpStatus.FORBIDDEN);
+        }
+        for(CartOrderDTO cartOrder : cartOrderDTOList){
+            if(!cartService.validateCartItem(cartOrder.getCartItemId(),
+                    principal.getName())){
+                return new ResponseEntity<>("주문 권한이 없습니다.",
+                        HttpStatus.FORBIDDEN);
+            }
+        }
+        Long orderid = cartService.orderCartItem(cartOrderDTOList, principal.getName());
+        return new ResponseEntity<>(orderid, HttpStatus.OK);
     }
 }

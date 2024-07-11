@@ -8,9 +8,8 @@
 </head>
 <div layout:fragment="content">
     <br>
+    <div style="display: flex; justify-content: center; align-items: center;">
     <form th:action="@{/}" method="get">
-        <!--                    <input name="searchQuery" class="form-control me-2" type="search" placeholder="검색하기"-->
-        <!--                           aria-label="Search">-->
         <div class="input-container">
             <input
                     class="input"
@@ -21,6 +20,7 @@
         </div>
 
     </form>
+    </div>
     <br>
     <input type="hidden" name="searchQuery" th:value="${goodsSearchDTO.searchQuery}">
     <div th:if="${not #strings.isEmpty(goodsSearchDTO.searchQuery)}" class="center">

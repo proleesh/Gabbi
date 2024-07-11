@@ -3,7 +3,6 @@ package org.proleesh.gabbi.controller;
 import org.proleesh.gabbi.entity.Video;
 import org.proleesh.gabbi.entity.VideoComment;
 import org.proleesh.gabbi.repository.VideoRepository;
-import org.proleesh.gabbi.service.GoodsService;
 import org.proleesh.gabbi.service.VideoCommentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -23,7 +22,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**

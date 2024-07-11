@@ -1,5 +1,6 @@
 package org.proleesh.gabbi.component;
 
+import lombok.RequiredArgsConstructor;
 import org.proleesh.gabbi.constant.MessageType;
 import org.proleesh.gabbi.entity.ChatMessage;
 import org.slf4j.Logger;
@@ -18,11 +19,11 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
  * date: 2024.6.27
  */
 @Component
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class WebSocketEventListener {
     private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
 
-    @Autowired
-    private SimpMessageSendingOperations messagingTemplate;
+    private final SimpMessageSendingOperations messagingTemplate;
 
 
     @EventListener
@@ -36,7 +37,7 @@ public class WebSocketEventListener {
 
         String username = (String)headerAccessor.getSessionAttributes().get("username");
         if(username != null){
-            logger.info("끊긴 사용자: " + username);
+            logger.info("끊긴 사용자: {}", username);
 
             ChatMessage cm = new ChatMessage();
             cm.setType(MessageType.LEAVE);

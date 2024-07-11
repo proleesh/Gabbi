@@ -93,6 +93,8 @@ public class VideoController {
                 .orElse(null);
 
         if (video != null) {
+            video.setViews(video.getViews() + 1);
+            videoRepository.save(video);
         List<VideoComment> videoComments = videoCommentService.getCommentsByVideoName(video.getTitle());
             model.addAttribute("videoUrl", "/video/" + filename);
             model.addAttribute("videoTitle", video.getTitle());
@@ -101,6 +103,7 @@ public class VideoController {
             model.addAttribute("videoId", video.getId());
             model.addAttribute("videoCreateBy", video.getCreatedBy());
             model.addAttribute("videoComments", videoComments);
+            model.addAttribute("videoViews", video.getViews());
             return "watch/watchVideo";
         } else {
             return "redirect:/watch";
@@ -158,7 +161,7 @@ public class VideoController {
             // 동영상을 DB에 저장하기
             Video video = new Video(file.getOriginalFilename(),
                     title,
-                    author);
+                    author, 0);
             videoRepository.save(video);
 
             String message = "당신은 성공적으로 동영상 " + file.getOriginalFilename() + "를 업로드 했습니다.";

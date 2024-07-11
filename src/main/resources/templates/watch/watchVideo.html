@@ -22,7 +22,7 @@
             <button type="submit" class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">삭제</button>
         </form>
         <hr>
-        <div class="card">
+
             <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls>
                 <source th:src="@{${videoUrl}}" type="video/mp4" size="2160"/>
                 <source th:src="@{${videoUrl}}" type="video/mp4" size="1080"/>
@@ -33,9 +33,9 @@
                 <source th:src="@{${videoUrl}}" type="video/mkv" size="720"/>
                 <source th:src="@{${videoUrl}}" type="video/mkv" size="360"/>
             </video>
-        </div>
         <hr>
         <h4 th:text="'아티스트: ' + ${videoAuthor}"></h4>
+        <h4  th:text="'시청수: ' + ${videoViews}">0</h4>
         <div class="text-muted mb-2" sec:authorize="isAuthenticated()"
              th:text="|등록시간: ${#temporals.format(videoDate, 'yyyy년MM월dd일 HH시mm분ss초')}|"></div>
 

@@ -20,16 +20,6 @@
             <a class="btn btn-light btn-lg" href="/watch/upload" sec:authorize="isAuthenticated()">새로운 동영상 업로드</a>
         </div>
         <br>
-        <div class="cube-container">
-            <div class="cube">
-                <div class="face front">K-POP</div>
-                <div class="face back">J-POP</div>
-                <div class="face right">EDM</div>
-                <div class="face left">R&B</div>
-                <div class="face top">TAIWAN</div>
-                <div class="face bottom">BALLAD</div>
-            </div>
-        </div>
         <br>
         <div class="mt-3" th:if="${message}">
             <div class="alert alert-info" th:text="${message}"></div>

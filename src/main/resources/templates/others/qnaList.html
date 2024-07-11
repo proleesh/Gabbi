@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/qna.css}"/>
 </head>
 <div layout:fragment="content">
-        <br>
+    <br>
     <div class="container" sec:authorize="isAuthenticated()">
         <h1><img th:src="@{/img/qna.png}" width="50" height="50">&nbsp;Q&A 자유 게시판</h1>
         <hr/>
@@ -27,18 +27,30 @@
         </button>
 
 
-
         <br>
-        <div class="card mb-3" th:each="item: ${qna_all}">
-            <h5 class="card-header" th:text="${item.id}"></h5>
-            <div class="card-body">
-                <h5 class="card-title" th:text="${item.qnaTitle}"></h5>
-                <p class="card-text" th:text="${item.qnaContent}"></p>
-                <a th:href="@{/qna-all/{id}(id=${item.id})}"><button class="button" >보러가기
-                    <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
-                        <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
-                    </svg></button>
-                </a>
+        <div class="row">
+            <div class="col-md-4 mb-4" th:each="item: ${qna_all}">
+                <div class="card mb-3">
+                    <h5 class="card-header" th:text="${item.id}"></h5>
+                    <div class="card-body">
+                        <p class="card-title" th:text="${item.qnaTitle}"></p>
+                        <p class="small-desc" th:text="${item.qnaContent}"></p>
+                        <a th:href="@{/qna-all/{id}(id=${item.id})}">
+                            <button class="button">보러가기
+                                <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                                    <path clip-rule="evenodd"
+                                          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                                          fill-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                    <a th:href="@{/qna-all/{id}(id=${item.id})}">
+                        <div class="go-corner">
+                            <div class="go-arrow">→</div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

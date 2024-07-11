@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -20,10 +19,12 @@ public class Video extends BaseEntity{
     private String fileName;
     private String title;
     private String author;
+    private int views;
 
-    public Video(String fileName, String title, String author){
+    public Video(String fileName, String title, String author, int views){
         this.fileName = fileName;
         this.title = title;
         this.author = author;
+        this.views = views;
     }
 }

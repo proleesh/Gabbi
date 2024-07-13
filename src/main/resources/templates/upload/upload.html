@@ -20,6 +20,7 @@
             </div>
             <button type="submit" class="shadow__btn w-100">업로드</button>
         </form>
+        <br>
         <a href="/watch">
             <button class="learn-more w-100">
   <span class="circle" aria-hidden="true">
@@ -28,21 +29,24 @@
                 <span class="button-text">돌아가기</span>
             </button>
         </a>
-
+<br>
 
         <div class="mt-3" th:if="${message}">
             <div class="alert alert-info" th:text="${message}"></div>
         </div>
-
-        <p sec:authorize="isAuthenticated()">
+<br>
+        <div class="alert alert-warning" sec:authorize="isAuthenticated()">
             로컬 저장소에 접근할 수 있으니 정보를 탈취할 행위가 없으므로 걱정할 필요 없습니다.
-        </p>
-        <p sec:authorize="isAuthenticated()">
+        </div>
+        <div class="alert alert-warning" sec:authorize="isAuthenticated()">
             포맷 형식: 아티스트 네임_제목 artist name_title
-        </p>
-        <p sec:authorize="isAuthenticated()">
+        </div>
+        <div class="alert alert-warning" sec:authorize="isAuthenticated()">
             경고: 이모티콘이나 []등 부호는 아직까지 지원하지 않음! 추후에 지원할 예정!
-        </p>
+        </div>
+        <div class="alert alert-warning" sec:authorize="isAuthenticated()">
+            <b>경고: 현재 까지 지원한 최대 용량 크기는 100GB 이하입니다.</b>
+        </div>
     </div>
 </div>
 </html>

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.proleesh.gabbi.constant.Role;
 import org.proleesh.gabbi.dto.MemberFormDTO;
 import org.proleesh.gabbi.entity.Member;
+import org.proleesh.gabbi.repository.MemberRepository;
 import org.proleesh.gabbi.service.MemberService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,17 +15,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @RequestMapping("/members")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/new")
     public String memberForm(Model model) {
         model.addAttribute("memberFormDTO", new MemberFormDTO());
         return "member/memberForm";
+    }
+
+    @GetMapping("/membersCount")
+    public String countMembers(Model model) {
+        List<Member> members = memberRepository.findAll();
+        int memberCount = members.size();
+        model.addAttribute("memberCount", memberCount);
+        return "member/membersData";
     }
 
 
@@ -37,6 +49,7 @@ public class MemberController {
             return "member/memberForm";
         }
         try {
+
             Member member = Member.createMember(memberFormDto, passwordEncoder, Role.USER);
             memberService.saveMember(member);
         }catch(IllegalStateException e){
@@ -51,6 +64,7 @@ public class MemberController {
     public String loginMember(){
         return "member/memberLoginForm";
     }
+
 
     @GetMapping(value="/login/error")
     public String loginError(Model model){

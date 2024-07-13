@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>신규 가입자 수</title>
+  <link rel="stylesheet" th:href="@{/css/membersData.css}">
+</head>
+<body>
+<div layout:fragment="content" class="styleContainer">
+    <br><br><br>
+  <div  style="display:flex; justify-content: center; align-items: center;">
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-front">
+        <p>총 가입자 수(관리자 포함)</p>
+      </div>
+      <div class="card-back" th:text="${memberCount}" sec:authorize="hasRole('ROLE_ADMIN')">
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

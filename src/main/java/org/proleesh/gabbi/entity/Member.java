@@ -31,6 +31,8 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private Long newMemberCount;
+
     public static Member createMember(MemberFormDTO memberFormDTO,
                                       PasswordEncoder passwordEncoder,
                                       Role role) {

@@ -68,7 +68,8 @@
             </table>
             <div th:with="start=${(goodsAll.number/maxPage)*maxPage + 1},
              end=(${(goodsAll.totalPages == 0) ? 1 : (start + (maxPage - 1)
-              < goodsAll.totalPages ? start + (maxPage - 1) : goodsAll.totalPages)})" sec:authorize="hasRole('ROLE_ADMIN')">
+              < goodsAll.totalPages ? start + (maxPage - 1) : goodsAll.totalPages)})"
+                 sec:authorize="hasRole('ROLE_ADMIN')">
                 <ul class="pagination pagination-sm justify-content-center">
                     <li class="page-item" th:classappend="${goodsAll.first} ? 'disabled'">
                         <a th:onclick="'javascript:page(' + ${goodsAll.number - 1} + ')'" aria-label="Previous"
@@ -92,7 +93,8 @@
                 </ul>
             </div>
 
-            <div class="row row-cols-lg-auto g-3 justify-content-center" th:object="${goodsSearchDTO}" sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="row row-cols-lg-auto g-3 justify-content-center" th:object="${goodsSearchDTO}"
+                 sec:authorize="hasRole('ROLE_ADMIN')">
                 <select th:field="*{searchDateType}" class="form-control" style="width: auto;">
                     <option value="all">전체기간</option>
                     <option value="1d">1일</option>
@@ -100,12 +102,14 @@
                     <option value="1m">1개월</option>
                     <option value="6m">6개월</option>
                 </select>
-                <select th:field="*{searchSellStatus}" class="form-control" style="width: auto;" sec:authorize="hasRole('ROLE_ADMIN')">
+                <select th:field="*{searchSellStatus}" class="form-control" style="width: auto;"
+                        sec:authorize="hasRole('ROLE_ADMIN')">
                     <option value="">판매상태(전체)</option>
                     <option value="SELL">판매</option>
                     <option value="SOLD_OUT">품절</option>
                 </select>
-                <select th:field="*{searchBy}" class="form-control" style="width:auto;" sec:authorize="isAuthenticated()">
+                <select th:field="*{searchBy}" class="form-control" style="width:auto;"
+                        sec:authorize="isAuthenticated()">
                     <option value="goodsName">상품명</option>
                     <option value="createdBy">등록자</option>
                 </select>

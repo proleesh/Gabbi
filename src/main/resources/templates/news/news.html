@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>뉴스 검색</title>
+    <link rel="stylesheet" th:href="@{/css/news.css}"/>
+</head>
+<div layout:fragment="content">
+    <br>
+    <div class="container">
+        <h1><img th:src="@{/img/news.png}" width="50" height="50">&nbsp;뉴스 검색 Powered by &nbsp;<img
+                th:src="@{/img/naver-logo.png}" width="auto" height="50"></h1>
+        <form action="#" th:action="@{/news}" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="query" placeholder="실시간 뉴스 검색하기..."/>
+                <div class="input-group-lg">
+                    <button class="btn btn-outline-info" type="submit">검색</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row" th:if="${newsArticles}">
+            <div class="col-md-4 mb-4" th:each="article : ${newsArticles}">
+                <div class="card">
+                    <h3 class="card_title" th:text="${article.title}"></h3>
+                    <p class="card__content" th:text="${article.description}"></p>
+                    <p class="card__date" th:text="${article.pubDate}"></p>
+                    <a class="card_arrow" th:href="${article.link}" target="_blank">
+                        <div class="card__arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15"
+                                 width="15">
+                                <path fill="#fff"
+                                      d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</html>

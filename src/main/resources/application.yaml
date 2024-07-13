@@ -38,3 +38,7 @@ uploadPath: file:src/main/resources/static/gabbi/images/
 file:
   upload-dir: src/main/resources/static/videos
 videoUploadPath: file:src/main/resources/static/videos/
+
+naver:
+  client-id: hIn6AfYfT3lXQQk3tdGO
+  client-secret: ACIDHrghqt

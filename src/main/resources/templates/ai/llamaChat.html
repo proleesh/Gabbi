@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>Gabbi AI Powered by OLLAMA</title>
+    <link rel="stylesheet" th:href="@{/css/llamaChat.css}">
+</head>
+<div layout:fragment="content">
+    <form th:aciton="@{/ai/generate}" method="post">
+        <br><br>
+        <div class="box-input">
+            <label for="promptMessage">생성할 메시지를 입력하세요: </label>
+            <div class="border">
+                <input class="input_" type="text" id="promptMessage" name="promptMessage" placeholder="Gabbi LLM"
+                       th:value="${promptMessage}"/>
+            </div>
+            <br>
+            <button type="submit" class="b1">생성</button>
+        </div>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div th:if="${aiResponse}" th:text="${aiResponse.message}"></div>
+</div>
+</html>

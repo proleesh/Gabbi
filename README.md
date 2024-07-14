@@ -4,7 +4,7 @@
 ## Visible: `Confidential`
 ## Description: `This is gradution project aka. 'Capstone Design' of University.`
 ### Tech Skill
-#### Java(JDK 21), Spring Boot(3.3), Thymeleaf, QueryDSL, MySQL9.0 Innovation, Spring Security 6, Spring WebSocket, JavaScript(ES6+), Java(Jakarta) Persistence API(JPA), RESTFul API, jQuery(부분적으로 사용함)
+#### Java(JDK 21), Ollama3, Spring Boot(3.3), Thymeleaf, QueryDSL, MySQL9.0 Innovation, Spring Security 6, Spring WebSocket, JavaScript(ES6+), Java(Jakarta) Persistence API(JPA), RESTFul API, jQuery(부분적으로 사용함)
 ## Feature: `아이디로 관리자와 사용자를 자동으로 구분하고 해당 페이지에 로그인함, JPA(Jakarta Persistence API)사용한 장점은 Sql query문 따로 작성 할 필요 없어서 개발자 입장에서 편리함. 개발자는 그냥 코드 로직과 필요한 query문 QueryDSL의 annotation을 통해 DB접근 가능. 올리고 싶은 동영상을 마음대로 올릴 수 있음. 게시판 마음대로 작성할 수 있음.`
 ## 작동방법: Spring Boot Starter를 클릭하면 바로 실행 가능 따로 SQL 테이블을 생성할 필요 없음, 전제 조건은 로컬에 MySQL 설치되어 있고, 해당 DB(gabbi)이 있어야 함.
 ## 실행 화면:

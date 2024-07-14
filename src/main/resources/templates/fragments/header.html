@@ -79,6 +79,9 @@
                         <a class="nav-link" href="/news"><img th:src="@{/img/news.png}" width="25" height="25"> 뉴스 검색</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/ai/generate"><img th:src="@{/img/ollama.png}" width="30" height="30"> Gabbi LLM</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/cart"><img th:src="@{/img/shopping-cart.png}" width="25" height="25">&nbsp;장바구니</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">

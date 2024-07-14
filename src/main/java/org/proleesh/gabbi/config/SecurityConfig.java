@@ -43,6 +43,7 @@ public class SecurityConfig {
                                 "/**").permitAll()
                         .requestMatchers("/css/**",
                                 "/js/**",
+                                "/api/ai/generate/joke/**",
                                 "/videos/**",
                                 "/watch/**",
                                 "/img/**").permitAll()
@@ -51,8 +52,9 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
         ;
 
-        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
+        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+        http.csrf(c -> c.ignoringRequestMatchers("/api/ai/generate/joke/**"));
 
 //        http.csrf(AbstractHttpConfigurer::disable);
 

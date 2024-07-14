@@ -8,7 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.7.14
+ * Ollama Controller
+ */
 @Controller
 @RequiredArgsConstructor
 public class LlamaController {

@@ -6,7 +6,11 @@ import org.proleesh.gabbi.service.impl.LlamaAiServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.7.14
+ * Ollama Rest Controller
+ */
 @RestController
 @RequiredArgsConstructor
 public class LlamaRestController {

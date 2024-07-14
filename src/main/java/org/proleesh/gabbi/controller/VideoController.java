@@ -75,7 +75,7 @@ public class VideoController {
     public String watchVideo(Model model, @RequestParam(value = "message", required = false) String message) {
 
         List<Video> videos = videoRepository.findAll();
-        // 등록 순서 변환, 최신 Top
+
         videos = videos.stream()
                 .sorted(Comparator.comparing(Video::getRegisterTime)
                         .reversed())
@@ -139,7 +139,6 @@ public class VideoController {
 
             file.transferTo(destinationFile.toFile());
 
-            // 이름 특징 뽑내기
             int underscoreIndex = originalFilename.lastIndexOf('_');
             int dotIndex = originalFilename.lastIndexOf('.');
             int leftBracketIndex = originalFilename.lastIndexOf('[');
@@ -167,7 +166,6 @@ public class VideoController {
             String title = originalFilename.substring(underscoreIndex + 1, dotIndex);
 
 
-            // 동영상을 DB에 저장하기
             Video video = new Video(file.getOriginalFilename(),
                     title,
                     author, 0L);

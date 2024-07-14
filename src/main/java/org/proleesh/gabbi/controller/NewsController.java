@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 import java.util.List;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.7.13
+ * News Controller
+ */
 @Controller
 @AllArgsConstructor
 public class NewsController {

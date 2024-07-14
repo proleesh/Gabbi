@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.6.24
+ * Member Controller
+ */
 @RequestMapping("/members")
 @Controller
 @RequiredArgsConstructor

@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Comparator;
 import java.util.List;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.6,28
+ * QnA Controller
+ */
 @Controller
 @RequiredArgsConstructor
 public class QnAController {

@@ -22,7 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.6.27 ~ 7.8
+ * Goods Controller
+ */
 @Controller
 @RequiredArgsConstructor
 public class GoodsController {

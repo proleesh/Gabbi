@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.6.27 ~ 6.28
+ * Chat Controller
+ */
 @Controller
 public class ChatController {
     @GetMapping("/chat")

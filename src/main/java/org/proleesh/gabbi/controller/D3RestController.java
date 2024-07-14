@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.7.11
+ * D3 Rest Controller
+ */
 @RestController
 @RequiredArgsConstructor
 public class D3RestController {

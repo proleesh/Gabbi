@@ -12,7 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
-
+/**
+ * @author sung-hyuklee
+ * date: 2024.6.24
+ * Main Controller
+ */
 @Controller
 @RequiredArgsConstructor
 public class MainController {

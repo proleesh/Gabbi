@@ -14,159 +14,158 @@
 
 </head>
 <div layout:fragment="content">
-    <div class="container">
-        <br>
-        <h1 class="my-4" th:text="${videoTitle}">WATCH</h1>
-        <form th:action="@{/watch/delete/{id}(id=${videoId})}" method="post"
-              onsubmit="return confirm('정말로 삭제할까요?');">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <button type="submit" class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">삭제</button>
-        </form>
-        <hr>
+    <br>
+    <h1 class="my-4" th:text="${videoTitle}">WATCH</h1>
+    <form th:action="@{/watch/delete/{id}(id=${videoId})}" method="post"
+          onsubmit="return confirm('정말로 삭제할까요?');">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <button type="submit" class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">삭제</button>
+    </form>
+    <hr>
 
-        <video class="player" style="--plyr-color-main: #FAFF00;" playsinline controls>
-            <source th:src="@{${videoUrl}}" type="video/mp4"/>
-        </video>
-        <hr>
-        <h4 th:text="'아티스트: ' + ${videoAuthor}"></h4>
-        <h6 class="text-muted" th:text="'시청수: ' + ${videoViews}">0</h6>
-        <div class="text-muted mb-2" sec:authorize="isAuthenticated()"
-             th:text="|등록시간: ${#temporals.format(videoDate, 'yyyy년MM월dd일 HH시mm분ss초')}|"></div>
+    <video class="player" style="--plyr-color-main: #FAFF00; max-width: 100%; width:100%; height: 100%;" playsinline
+           controls>
+        <source th:src="@{${videoUrl}}" type="video/mp4"/>
+    </video>
+    <hr>
+    <h4 th:text="'아티스트: ' + ${videoAuthor}"></h4>
+    <h6 class="text-muted" th:text="'시청수: ' + ${videoViews}">0</h6>
+    <div class="text-muted mb-2" sec:authorize="isAuthenticated()"
+         th:text="|등록시간: ${#temporals.format(videoDate, 'yyyy년MM월dd일 HH시mm분ss초')}|"></div>
 
 
-        <div>
-            <a href="/watch">
-                <button class="learn-more">
+    <div>
+        <a href="/watch">
+            <button class="learn-more">
   <span class="circle" aria-hidden="true">
   <span class="icon arrow"></span>
   </span>
-                    <span class="button-text">돌아가기</span>
-                </button>
-            </a>
-        </div>
-
-
-        <br>
-        <h2><img th:src="@{/img/comment.png}" width="25" height="25">&nbsp;댓글</h2>
-        <!-- 댓글 Form -->
-        <div>
-            <textarea class="form-control" id="new-comment-content" rows="3" placeholder="댓글을 입력하세요..."></textarea>
-            <input type="hidden" id="video-name" th:value="${videoTitle}">
-            <button type="button" class="btn btn-light mt-2" id="submit-comment-btn">
-                <img th:src="@{/img/comment.png}" width="15" height="15">&nbsp;댓글 달기
+                <span class="button-text">돌아가기</span>
             </button>
-        </div>
-        <br>
+        </a>
+    </div>
 
-        <br>
-        <div class="list-group-item">
-            <div th:each="videoComment : ${videoComments}">
-                <div class="comment" th:attr="data-comment-id=${videoComment.id}">
-                    <p><img th:src="@{/img/comment.png}" width="15" height="15">&nbsp;<strong
-                            th:text="${videoComment.author}"></strong> <span th:text="${videoComment.content}"></span>
-                    </p>
-                    <p class="text-muted" sec:authorize="isAuthenticated()"
-                       th:text="|댓글시간: ${#temporals.format(videoComment.registerTime, 'yyyy년MM월dd일 HH시mm분')}|"></p>
-                    <button type="button" class="btn btn-link reply-btn" sec:authorize="isAuthenticated()">답글</button>
 
-                    <!-- 답글 Form -->
-                    <div class="reply-form" style="display: none;">
-                        <textarea class="form-control reply-content" rows="2" placeholder="답글을 입력하세요..."></textarea>
-                        <br>
-                        <button type="button" class="btn btn-light submit-reply-btn"><img th:src="@{/img/reply.png}"
-                                                                                          width="15" height="15">&nbsp;답글
-                            달기
-                        </button>
-                    </div>
+    <br>
+    <h2><img th:src="@{/img/comment.png}" width="25" height="25">&nbsp;댓글</h2>
+    <!-- 댓글 Form -->
+    <div>
+        <textarea class="form-control" id="new-comment-content" rows="3" placeholder="댓글을 입력하세요..."></textarea>
+        <input type="hidden" id="video-name" th:value="${videoTitle}">
+        <button type="button" class="btn btn-light mt-2" id="submit-comment-btn">
+            <img th:src="@{/img/comment.png}" width="15" height="15">&nbsp;댓글 달기
+        </button>
+    </div>
+    <br>
 
-                    <!-- 답글 -->
-                    <div class="replies" th:each="reply : ${videoComment.videoReplies}">
-                        <div class="reply" th:attr="data-reply-id=${reply.id}">
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img th:src="@{/img/reply.png}" width="15"
-                                                                              height="15">&nbsp;<strong
-                                    th:text="${reply.author}"></strong> <span th:text="${reply.content}"></span></p>
-                            <p class="text-muted" sec:authorize="isAuthenticated()"
-                               th:text="|답글시간: ${#temporals.format(reply.registerTime, 'yyyy년MM월dd일 HH시mm분')}|"></p>
+    <br>
+    <div class="list-group-item">
+        <div th:each="videoComment : ${videoComments}">
+            <div class="comment" th:attr="data-comment-id=${videoComment.id}">
+                <p><img th:src="@{/img/comment.png}" width="15" height="15">&nbsp;<strong
+                        th:text="${videoComment.author}"></strong> <span th:text="${videoComment.content}"></span>
+                </p>
+                <p class="text-muted" sec:authorize="isAuthenticated()"
+                   th:text="|댓글시간: ${#temporals.format(videoComment.registerTime, 'yyyy년MM월dd일 HH시mm분')}|"></p>
+                <button type="button" class="btn btn-link reply-btn" sec:authorize="isAuthenticated()">답글</button>
 
-                        </div>
+                <!-- 답글 Form -->
+                <div class="reply-form" style="display: none;">
+                    <textarea class="form-control reply-content" rows="2" placeholder="답글을 입력하세요..."></textarea>
+                    <br>
+                    <button type="button" class="btn btn-light submit-reply-btn"><img th:src="@{/img/reply.png}"
+                                                                                      width="15" height="15">&nbsp;답글
+                        달기
+                    </button>
+                </div>
+
+                <!-- 답글 -->
+                <div class="replies" th:each="reply : ${videoComment.videoReplies}">
+                    <div class="reply" th:attr="data-reply-id=${reply.id}">
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img th:src="@{/img/reply.png}" width="15"
+                                                                          height="15">&nbsp;<strong
+                                th:text="${reply.author}"></strong> <span th:text="${reply.content}"></span></p>
+                        <p class="text-muted" sec:authorize="isAuthenticated()"
+                           th:text="|답글시간: ${#temporals.format(reply.registerTime, 'yyyy년MM월dd일 HH시mm분')}|"></p>
+
                     </div>
                 </div>
             </div>
         </div>
-        <hr/>
     </div>
+    <hr/>
 
 
-<!--    <script th:inline="javascript">-->
+    <!--    <script th:inline="javascript">-->
 
-<!--        document.addEventListener('DOMContentLoaded', () => {-->
-<!--            let source = /*[[ ${videoUrl} ]]*/ '';-->
-<!--            const video = document.querySelector('video');-->
+    <!--        document.addEventListener('DOMContentLoaded', () => {-->
+    <!--            let source = /*[[ ${videoUrl} ]]*/ '';-->
+    <!--            const video = document.querySelector('video');-->
 
-<!--            const defaultOptions = {};-->
+    <!--            const defaultOptions = {};-->
 
-<!--            if (!Hls.isSupported()) {-->
-<!--                video.src = source;-->
-<!--                var player = new Plyr(video, defaultOptions);-->
-<!--            } else {-->
-<!--                // For more Hls.js options, see https://github.com/dailymotion/hls.js-->
-<!--                const hls = new Hls();-->
-<!--                hls.loadSource(source);-->
+    <!--            if (!Hls.isSupported()) {-->
+    <!--                video.src = source;-->
+    <!--                var player = new Plyr(video, defaultOptions);-->
+    <!--            } else {-->
+    <!--                // For more Hls.js options, see https://github.com/dailymotion/hls.js-->
+    <!--                const hls = new Hls();-->
+    <!--                hls.loadSource(source);-->
 
-<!--                // From the m3u8 playlist, hls parses the manifest and returns-->
-<!--                // all available video qualities. This is important, in this approach,-->
-<!--                // we will have one source on the Plyr player.-->
-<!--                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {-->
+    <!--                // From the m3u8 playlist, hls parses the manifest and returns-->
+    <!--                // all available video qualities. This is important, in this approach,-->
+    <!--                // we will have one source on the Plyr player.-->
+    <!--                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {-->
 
-<!--                    // Transform available levels into an array of integers (height values).-->
-<!--                    const availableQualities = hls.levels.map((l) => l.height)-->
-<!--                    availableQualities.unshift(0) //prepend 0 to quality array-->
+    <!--                    // Transform available levels into an array of integers (height values).-->
+    <!--                    const availableQualities = hls.levels.map((l) => l.height)-->
+    <!--                    availableQualities.unshift(0) //prepend 0 to quality array-->
 
-<!--                    // Add new qualities to option-->
-<!--                    defaultOptions.quality = {-->
-<!--                        default: 0, //Default - AUTO-->
-<!--                        options: availableQualities,-->
-<!--                        forced: true,-->
-<!--                        onChange: (e) => updateQuality(e),-->
-<!--                    }-->
-<!--                    // Add Auto Label-->
-<!--                    defaultOptions.i18n = {-->
-<!--                        qualityLabel: {-->
-<!--                            0: 'Auto',-->
-<!--                        },-->
-<!--                    }-->
+    <!--                    // Add new qualities to option-->
+    <!--                    defaultOptions.quality = {-->
+    <!--                        default: 0, //Default - AUTO-->
+    <!--                        options: availableQualities,-->
+    <!--                        forced: true,-->
+    <!--                        onChange: (e) => updateQuality(e),-->
+    <!--                    }-->
+    <!--                    // Add Auto Label-->
+    <!--                    defaultOptions.i18n = {-->
+    <!--                        qualityLabel: {-->
+    <!--                            0: 'Auto',-->
+    <!--                        },-->
+    <!--                    }-->
 
-<!--                    hls.on(Hls.Events.LEVEL_SWITCHED, function (event, data) {-->
-<!--                        var span = document.querySelector(".plyr__menu__container [data-plyr='quality'][value='0'] span")-->
-<!--                        if (hls.autoLevelEnabled) {-->
-<!--                            span.innerHTML = `AUTO (${hls.levels[data.level].height}p)`-->
-<!--                        } else {-->
-<!--                            span.innerHTML = `AUTO`-->
-<!--                        }-->
-<!--                    })-->
+    <!--                    hls.on(Hls.Events.LEVEL_SWITCHED, function (event, data) {-->
+    <!--                        var span = document.querySelector(".plyr__menu__container [data-plyr='quality'][value='0'] span")-->
+    <!--                        if (hls.autoLevelEnabled) {-->
+    <!--                            span.innerHTML = `AUTO (${hls.levels[data.level].height}p)`-->
+    <!--                        } else {-->
+    <!--                            span.innerHTML = `AUTO`-->
+    <!--                        }-->
+    <!--                    })-->
 
-<!--                    // Initialize new Plyr player with quality options-->
-<!--                    var player = new Plyr(video, defaultOptions);-->
-<!--                });-->
+    <!--                    // Initialize new Plyr player with quality options-->
+    <!--                    var player = new Plyr(video, defaultOptions);-->
+    <!--                });-->
 
-<!--                hls.attachMedia(video);-->
-<!--                window.hls = hls;-->
-<!--            }-->
+    <!--                hls.attachMedia(video);-->
+    <!--                window.hls = hls;-->
+    <!--            }-->
 
-<!--            function updateQuality(newQuality) {-->
-<!--                if (newQuality === 0) {-->
-<!--                    window.hls.currentLevel = -1; //Enable AUTO quality if option.value = 0-->
-<!--                } else {-->
-<!--                    window.hls.levels.forEach((level, levelIndex) => {-->
-<!--                        if (level.height === newQuality) {-->
-<!--                            console.log("Found quality match with " + newQuality);-->
-<!--                            window.hls.currentLevel = levelIndex;-->
-<!--                        }-->
-<!--                    });-->
-<!--                }-->
-<!--            }-->
-<!--        });-->
-<!--    </script>-->
+    <!--            function updateQuality(newQuality) {-->
+    <!--                if (newQuality === 0) {-->
+    <!--                    window.hls.currentLevel = -1; //Enable AUTO quality if option.value = 0-->
+    <!--                } else {-->
+    <!--                    window.hls.levels.forEach((level, levelIndex) => {-->
+    <!--                        if (level.height === newQuality) {-->
+    <!--                            console.log("Found quality match with " + newQuality);-->
+    <!--                            window.hls.currentLevel = levelIndex;-->
+    <!--                        }-->
+    <!--                    });-->
+    <!--                }-->
+    <!--            }-->
+    <!--        });-->
+    <!--    </script>-->
     <script th:src="@{/js/watch.js}"></script>
 </div>
 

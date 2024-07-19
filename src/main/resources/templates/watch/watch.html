@@ -54,7 +54,7 @@
                         <p class="card-text" sec:authorize="hasRole('ROLE_ADMIN')" th:text="'등록자: ' + ${video.createdBy}">[[${video.createdBy}]]</p>
                     </div>
 
-                    <a th:href="@{/watch/{filename}(filename=${video.fileName})}">
+                    <a th:href="@{/watch/{filename}(filename=${video.fileName})}" style="text-decoration: none">
                         <div class="card-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 384 512"
                                  stroke-width="0" fill="currentColor" stroke="currentColor">
